@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Main from '../../../layouts/main.astro';
+import {Guns} from "../../../../vendor/suroi/common/src/definitions/guns";
+import GunSidebar from "../../../components/sidebars/GunSidebar"
+
+export function getStaticPaths() {
+  let paths: any[] = [];
+  for (const gun of Guns) {
+    paths.push(
+      {params: {weapon: gun.idString}}
+    )
+  }
+  return paths
+}
+
+const {weapon} = Astro.params;
+---
+<Main>
+  <!-- stuff -->
+  <GunSidebar gun={weapon} />
+</Main>

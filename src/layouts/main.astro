@@ -1,5 +1,6 @@
 ---
 const {title, frontmatter} = Astro.props;
+import NavSideBar from "../components/navbar/NavSideBar.svelte"
 ---
 
 <style is:global>
@@ -71,10 +72,13 @@ html {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
-  <body class="bg-background dark">
-    <article class="mx-auto max-w-screen-2xl container my-8 prose prose-invert">
-      <h1>{title ?? frontmatter.title}</h1>
-      <slot />
-    </article>
+  <body class="bg-background dark font-sans">
+    <div class="flex flex-row">
+      <NavSideBar />
+      <article class="mx-auto max-w-screen-2xl container my-8 prose prose-invert">
+        <h1>{title ?? frontmatter.title}</h1>
+        <slot />
+      </article>
+    </div>
   </body>
 </html>

@@ -13,7 +13,7 @@ import CardLink from "../../components/CardLink.svelte";
       Guns.map((gun) => (
         <CardLink
           title={gun.name}
-          url={"/weapons/" + gun.idString}
+          url={"/weapons/guns/" + gun.idString}
           image={"/vendor/suroi/client/public/img/game/weapons/" + gun.idString + ".svg"}
           description={gun.idString}
         />
@@ -27,7 +27,7 @@ import CardLink from "../../components/CardLink.svelte";
       Melees.map((melee) => (
         <CardLink
           title={melee.name}
-          url={"/weapons/" + melee.idString}
+          url={"/weapons/melees/" + melee.idString}
           image={"/vendor/suroi/client/public/img/game/weapons/" + melee.idString + ".svg"}
           description={melee.idString}
         />
