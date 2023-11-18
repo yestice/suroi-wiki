@@ -1,0 +1,19 @@
+# Build
+dist/
+
+# Node
+node_modules/
+
+server/reports
+server/punishments.json
+
+# IDE garbage
+.idea
+.DS_Store
+.vscode
+*.kate-swp
+.history
+
+# try to prevent chpster moments from happening
+*.desktop
+*.css
