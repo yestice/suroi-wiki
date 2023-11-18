@@ -1,19 +1,19 @@
-import { FireMode } from "@/vendor/suroi/common/src/constants";
-import { GunDefinition } from "@/vendor/suroi/common/src/definitions/guns";
+import { FireMode } from "../../../vendor/suroi/common/src/constants";
+import { GunDefinition } from "../../../vendor/suroi/common/src/definitions/guns";
 import InfoboxRow from "./utils/InfoboxRow";
 import InfoboxColumn from "./utils/InfoboxColumn";
 import AmmoIcon from "../icons/AmmoIcon";
 import InfoxboxHeader from "./utils/InfoboxHeader";
-import { ExplosionDefinition } from "@/vendor/suroi/common/src/definitions/explosions";
+import { ExplosionDefinition } from "../../../vendor/suroi/common/src/definitions/explosions";
 import GenericSidebar from "./utils/GenericSidebar";
 import InfoboxAudio from "./utils/InfoboxAudio";
 import InfoboxAudioGroup from "./utils/InfoboxAudioGroup";
 import InfoboxSection from "./utils/InfoboxSection";
-import { Unpacked, WithRequired } from "@/lib/ts/utility";
+import { Unpacked, WithRequired } from "../../../lib/ts/utility";
 import {
   ItemDefinition,
   WearerAttributes,
-} from "@/vendor/suroi/common/src/utils/objectDefinitions";
+} from "../../../vendor/suroi/common/src/utils/objectDefinitions";
 
 export default function GunSidebar({ gun, explosion }: GunSidebarProps) {
   return (

@@ -1,6 +1,7 @@
 ---
 const {title, frontmatter} = Astro.props;
-import NavSideBar from "../components/navbar/NavSideBar.svelte"
+import NavSideBar from "../components/navbar/NavSideBar.svelte";
+import SearchBar from "../components/SearchBar.svelte";
 ---
 
 <style is:global>
@@ -74,11 +75,14 @@ html {
   </head>
   <body class="bg-background dark font-sans">
     <div class="flex flex-row">
-      <NavSideBar />
-      <article class="mx-auto max-w-screen-2xl container my-8 prose prose-invert">
-        <h1>{title ?? frontmatter.title}</h1>
-        <slot />
-      </article>
+        <NavSideBar />
+      <div class="flex flex-col mx-auto max-w-screen-xl container">
+        <SearchBar client:only />
+        <article class="my-8 prose prose-invert">
+          <h1>{title ?? frontmatter.title}</h1>
+          <slot />
+        </article>
+      </div>
     </div>
   </body>
 </html>

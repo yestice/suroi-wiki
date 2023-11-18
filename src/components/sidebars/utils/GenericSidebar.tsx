@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function GenericSidebar({
   children,
   title,
@@ -12,7 +10,7 @@ export default function GenericSidebar({
           <h2 className="text-xl font-bold text-center">{title}</h2>
         </div>
         <div className="flex justify-center p-2">
-          <Image
+          <img
             src={image}
             width={128}
             height={128}
