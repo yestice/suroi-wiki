@@ -1,0 +1,43 @@
+---
+layout: "../layouts/main.astro"
+title: "Offical Suroi Wiki"
+---
+import CardLink from "../components/CardLink.svelte"
+
+<img class="flex justify-center mx-auto" width="375" height="150" src="/vendor/suroi/client/public/img/logos/suroi.png" alt="Suroi Logo"/>
+
+Welcome to the official Suroi wiki! Suroi is an open-source 2D battle royale game inspired by surviv.io. You can play it at [suroi.io](https://suroi.io)
+
+This wiki is also open-source! Any contributions are appreciated. To contribute, head over to [the GitHub repo](https://github.com/HasangerGames/suroi-wiki)
+
+## Notable Pages
+
+<div className="flex flex-col flex-wrap gap-4 mt-8 lg:flex-row">
+  <CardLink
+    title="Weapons"
+    description="List of Weapons"
+    url="/weapons"
+    image="/vendor/suroi/client/public/img/game/weapons/ak47.svg"
+  />
+
+  <CardLink
+    title="Consumables"
+    description="List of Consumables"
+    url="/consumables"
+    image="/vendor/suroi/client/public/img/game/loot/medikit.svg"
+  />
+
+  <CardLink
+    title="Loot Tables"
+    description="Loot Drop Rates"
+    url="/loottables"
+    image="/vendor/suroi/client/public/img/game/obstacles/flint_crate.svg"
+  />
+
+  <CardLink
+    title="Equipment"
+    description="List of Equipment"
+    url="/equipment"
+    image="/vendor/suroi/client/public/img/game/loot/regular_vest.svg"
+  />
+</div>

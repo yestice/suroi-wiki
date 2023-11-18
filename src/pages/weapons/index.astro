@@ -1,0 +1,37 @@
+---
+import Main from "../../layouts/main.astro";
+import {Guns} from "../../../vendor/suroi/common/src/definitions/guns";
+import {Melees} from "../../../vendor/suroi/common/src/definitions/melees";
+import CardLink from "../../components/CardLink.svelte";
+---
+
+<Main title="List of Weapons">
+  <p>There are currently {Guns.length} guns and {Melees.length} melee weapons in the game</p>
+  <h2>Guns</h2>
+  <div class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    {
+      Guns.map((gun) => (
+        <CardLink
+          title={gun.name}
+          url={"/weapons/" + gun.idString}
+          image={"/vendor/suroi/client/public/img/game/weapons/" + gun.idString + ".svg"}
+          description={gun.idString}
+        />
+      ))
+    }
+  </div>
+
+  <h2>Melees</h2>
+  <div class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    {
+      Melees.map((melee) => (
+        <CardLink
+          title={melee.name}
+          url={"/weapons/" + melee.idString}
+          image={"/vendor/suroi/client/public/img/game/weapons/" + melee.idString + ".svg"}
+          description={melee.idString}
+        />
+      ))
+    }
+  </div>
+</Main>
