@@ -3,6 +3,7 @@ layout: "../../layouts/main.astro"
 title: "Contributing to the Wiki"
 ---
 import CardLink from "../../components/CardLink.svelte"
+import Notice from "../../components/article/Notice.svelte"
 
 Thank you for considering to contribute to the wiki! This page is a guide on how you can contribute to the wiki.
 
@@ -11,11 +12,13 @@ Thank you for considering to contribute to the wiki! This page is a guide on how
     title="For Writers"
     description="Guide on how to write articles for the wiki"
     url="#writing"
+    image="../../../../vendor/suroi/client/public/img/game/emotes/monocle_face.svg"
   />
   <CardLink
     title="For Developers"
     description="Guide on how to contribute code to the wiki"
     url="#developing"
+    image="../../../../vendor/suroi/client/public/img/game/emotes/thinking_face.svg"
   />
 </div>
 
@@ -33,7 +36,10 @@ Before writing there are guidelines you have to agree to if you want your writin
 - Submit incorrect and inaccurate information. The maintainers of this wiki know the game well enough that it isn't true (that there are AI players in the game)
 - Write strategies if you are new/inexperienced in the game
 
-Articles are reviewed before they will be put into the wiki.
+<Notice
+  emoteID="questioning_face"
+  text="Articles are reviewed before they will be put into the wiki."
+/>
 
 ### Writing an article
 1. Get a GitHub account [here](https://github.com/signup) if you haven't gotten one

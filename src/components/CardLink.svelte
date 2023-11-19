@@ -11,13 +11,7 @@
       class="flex gap-8 p-4 w-full h-full rounded-md border transition-colors border-border hover:border-blue-500 group"
     >
       <div class="flex justify-center items-center">
-        <img
-          src={image}
-          width={50}
-          height={50}
-          alt={`${title} page image`}
-          class=""
-        />
+        <img src={image} width={40} height={40} alt={`${title} page image`} class="" />
       </div>
       <div class="flex-1">
         <h3
