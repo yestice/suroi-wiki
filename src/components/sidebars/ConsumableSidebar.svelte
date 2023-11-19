@@ -38,5 +38,5 @@
       .toFixed(1)
       .toString()}
   />
-  <SectionAudio name="Use Sound" sound={"../../../vendor/suroi/client/public/audio/sfx/healing/" + consumable.idString} />
+  <SectionAudio name="Use Sound" sound={"../../../vendor/suroi/client/public/audio/sfx/healing/" + consumable.idString + ".mp3"} />
 </Section>
