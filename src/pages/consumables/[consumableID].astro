@@ -6,11 +6,11 @@ import ConsumableSidebar from "src/components/sidebars/ConsumableSidebar.svelte"
 import { HealingItems } from "@suroi/common/src/definitions/healingItems";
 
 export function getStaticPaths() {
-  let paths: any[] = [];
+  let paths: any= [];
 
-  HealingItems.map((consumable) => paths.push(
-    {params: {consumableID: consumable.idString}}
-    ));
+  for (const consumable of HealingItems) {
+    paths.push({params: {consumableID: consumable.idString}})
+  }
 
   return paths;
 }
