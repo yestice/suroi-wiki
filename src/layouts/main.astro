@@ -1,5 +1,6 @@
 ---
 const {title, frontmatter} = Astro.props;
+import { ViewTransitions } from 'astro:transitions';
 import NavSideBar from "../components/navbar/NavSideBar.svelte";
 import SearchBar from "../components/SearchBar.svelte";
 ---
@@ -72,13 +73,14 @@ html {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ViewTransitions />
   </head>
   <body class="bg-background dark font-sans">
     <div class="flex flex-row">
         <NavSideBar />
       <div class="flex flex-col mx-auto max-w-screen-xl container">
         <SearchBar client:only />
-        <article class="my-8 prose prose-invert">
+        <article class="my-8 prose prose-invert prose-a:text-orange-500" transition:animate="fade">
           <h1>{title ?? frontmatter.title}</h1>
           <slot />
         </article>
