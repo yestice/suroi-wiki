@@ -1,10 +1,11 @@
 <script lang="ts">
   export let id: string;
+  export let size: number = 50;
 </script>
 
 <img
   src={"../../../vendor/suroi/client/public/img/game/loot/" + id + ".svg"}
   alt={id + " icon"}
-  width=50
-  height=50
+  width={size}
+  height={size}
 />

@@ -1,12 +1,14 @@
 <script lang="ts">
+  import SectionItem from "./SectionItem.svelte";
+
   export let name: string;
   export let sound: string;
 </script>
 
-<div class="flex flex-col sm:flex-row gap-4 p-4 border-primary border-2">
+<SectionItem>
   <span>{name + ":"}</span>
   <audio controls>
     <source src={sound} type="audio/mpeg">
     Your browser does not support audio.
   </audio>
-</div>
+</SectionItem>

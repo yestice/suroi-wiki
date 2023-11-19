@@ -2,6 +2,7 @@
 import { getEntry } from "astro:content";
 import Main from "../../../layouts/main.astro";
 import { Guns } from "../../../../vendor/suroi/common/src/definitions/guns";
+import GunSidebar from "../../../components/sidebars/GunSidebar.svelte";
 
 export function getStaticPaths() {
   let paths: any[] = [];
@@ -19,13 +20,17 @@ const { gunID } = Astro.params;
 let Gun;
 
 for (const gun of Guns) {
-  if (gunID == gun) {
+  if (gunID == gun.idString) {
     Gun = gun;
     break;
   }
 }
 ---
 
-<Main title={Gun?.name ?? "Undefined Gun"}>
-  <!--<Content />-->
+<Main title={Gun?.name}>
+  <div class="flex flex-col-reverse sm:flex-row">
+    <!--<Content />-->
+    <p>pee</p>
+    <GunSidebar gun={Gun}>lol</GunSidebar>
+  </div>
 </Main>

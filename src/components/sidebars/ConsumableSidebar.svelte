@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { HealingItemDefinition } from "@suroi/common/src/definitions/healingItems";
   import Section from "./util/Section.svelte";
-  import SectionItem from "./util/SectionItem.svelte";
+  import SectionValue from "./util/SectionValue.svelte";
   import SectionImage from "./util/SectionImage.svelte";
   import SectionAudio from "./util/SectionAudio.svelte";
 
@@ -15,7 +15,7 @@
       ".svg"}
     alt={consumable.name + " Sprite"}
   />
-  <SectionItem
+  <SectionValue
     name="Heal Type"
     value={consumable.healType == 0
       ? "Health"
@@ -23,16 +23,16 @@
       ? "Adrenaline"
       : "Unknown"}
   />
-  <SectionItem
+  <SectionValue
     name="Restore Amount"
     value={consumable.restoreAmount.toString()}
   />
-  <SectionItem name="ID String" value={consumable.idString} mono={true} />
-  <SectionItem
+  <SectionValue name="ID String" value={consumable.idString} mono={true} />
+  <SectionValue
     name="Use Time"
     value={consumable.useTime.toString() + " seconds"}
   />
-  <SectionItem
+  <SectionValue
     name="Restore Amount per Second"
     value={(consumable.restoreAmount / consumable.useTime)
       .toFixed(1)
