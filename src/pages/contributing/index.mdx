@@ -1,0 +1,47 @@
+---
+layout: "../../layouts/main.astro"
+title: "Contributing to the Wiki"
+---
+import CardLink from "../../components/CardLink.svelte"
+
+Thank you for considering to contribute to the wiki! This page is a guide on how you can contribute to the wiki.
+
+<div class="flex flex-col gap-4 lg:flex-row">
+  <CardLink
+    title="For Writers"
+    description="Guide on how to write articles for the wiki"
+    url="#writing"
+  />
+  <CardLink
+    title="For Developers"
+    description="Guide on how to contribute code to the wiki"
+    url="#developing"
+  />
+</div>
+
+## Writing
+
+Before writing there are guidelines you have to agree to if you want your writing to be on the wiki:
+
+### Do
+- Write correct and accurate information
+- Use your own words
+- Follow the conventions that other articles use
+
+### Don't
+- Copy and paste from Wikipedia or other sources! Paraphrase what you learned
+- Submit incorrect and inaccurate information. The maintainers of this wiki know the game well enough that it isn't true (that there are AI players in the game)
+- Write strategies if you are new/inexperienced in the game
+
+Articles are reviewed before they will be put into the wiki.
+
+### Writing an article
+1. Get a GitHub account [here](https://github.com/signup) if you haven't gotten one
+2. Create a fork of the wiki [here](https://github.com/HasangerGames/suroi-wiki/fork)
+3. The `src/content/` directory is where you can find written content
+4. Edit the wiki using **MDX**, an extended version of [Markdown](https://www.markdownguide.org/cheat-sheet/)
+5. Create a pull request
+
+## Developing
+
+This wiki uses [Astro](https://astro.build), and uses [React](https://react.dev) and [Svelte](https://svelte.dev) for writing components. We also use [TailwindCSS](https://tailwindcss.com) to style the wiki
