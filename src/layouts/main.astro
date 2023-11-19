@@ -77,10 +77,10 @@ html {
   </head>
   <body class="bg-background dark font-sans">
     <div class="flex flex-row">
-        <NavSideBar />
+        <NavSideBar client:load />
       <div class="flex flex-col mx-auto max-w-screen-xl container">
         <SearchBar client:only />
-        <article class="my-8 prose prose-invert prose-a:text-orange-500" transition:animate="fade">
+        <article class="my-8 min-h-screen prose prose-invert prose-a:text-orange-500" transition:animate="fade">
           <h1>{title ?? frontmatter.title}</h1>
           <slot />
         </article>

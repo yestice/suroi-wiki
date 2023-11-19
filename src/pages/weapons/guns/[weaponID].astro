@@ -11,22 +11,22 @@ export function getStaticPaths() {
   }
   return paths;
 }
-
-const { weaponID } = Astro.params;
-
-const { article } = await getEntry('weapons', 'guns', weaponID);
-const { Content } = await article.render();
-
-let Gun;
-
-for (const gun of Guns) {
-  if (weaponID == gun) {
-    Gun = gun;
-    break;
-  }
-}
+//
+//const { weaponID } = Astro.params;
+//
+//const { article } = await getEntry('weapons', 'guns', weaponID);
+//const { Content } = await article.render();
+//
+//let Gun;
+//
+//for (const gun of Guns) {
+//  if (weaponID == gun) {
+//    Gun = gun;
+//    break;
+//  }
+//}
 ---
 
-<Main title={Gun.name}>
-  <Content />
+<Main title="lol">
+  <!--<Content />-->
 </Main>
