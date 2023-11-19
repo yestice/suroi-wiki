@@ -43,41 +43,43 @@ const app = Config.ssl
     : App();
 
 const games: Array<Game | undefined> = [];
-createNewGame(0);
 
-function createNewGame(id: number): void {
-    if (games[id] === undefined || games[id]?.stopped) {
-        Logger.log(`Game #${id} | Creating...`);
-        games[id] = new Game(id);
-    }
-}
-
-export function newGame(): void {
-    for (let i = 0; i < Config.maxGames; i++) {
-        if (games[i] === undefined || games[i]?.stopped) {
-            createNewGame(i);
-            return;
+export function newGame(id?: number): number {
+    if (id !== undefined) {
+        if (!games[id] || games[id]?.stopped) {
+            Logger.log(`Game ${id} | Creating...`);
+            games[id] = new Game(id);
+            return id;
+        }
+    } else {
+        for (let i = 0; i < Config.maxGames; i++) {
+            if (!games[i] || games[i]?.stopped) return newGame(i);
         }
     }
+    return -1;
 }
 
-export function endGame(id: number): void {
+export function endGame(id: number, createNewGame: boolean): void {
     const game = games[id];
     if (game === undefined) return;
+    game.allowJoin = false;
     game.stopped = true;
     clearTimeout(game.startTimeoutID);
     clearTimeout(game.gas.timeoutID);
     for (const player of game.connectedPlayers) {
         player.socket.close();
     }
-    games[id] = undefined;
-    Logger.log(`Game #${id} | Ended`);
-    createNewGame(id);
+    Logger.log(`Game ${id} | Ended`);
+    if (createNewGame) {
+        Logger.log(`Game ${id} | Creating...`);
+        games[id] = new Game(id);
+    } else {
+        games[id] = undefined;
+    }
 }
 
-function canJoin(gameID: number): boolean {
-    const game = games[gameID];
-    return game !== undefined && game.created && !game.over && game.aliveCount < Config.maxPlayersPerGame;
+function canJoin(game?: Game): boolean {
+    return game !== undefined && game.aliveCount < Config.maxPlayersPerGame && !game.over;
 }
 
 const decoder = new TextDecoder();
@@ -139,18 +141,30 @@ app.get("/api/getGame", async(res, req) => {
             removePunishment(ip);
         }
     } else {
-        let newestGameID = -1;
-        let newestGameCreatedTime = 0;
+        let foundGame = false;
         for (let gameID = 0; gameID < Config.maxGames; gameID++) {
             const game = games[gameID];
-            if (game === undefined) continue;
-            if (canJoin(gameID) && game.createdTime > newestGameCreatedTime) {
-                newestGameID = gameID;
-                newestGameCreatedTime = game.createdTime;
+            if (canJoin(game) && game?.allowJoin) {
+                response = { success: true, gameID };
+                foundGame = true;
+                break;
             }
         }
-        if (newestGameID === -1) response = { success: false };
-        else response = { success: true, gameID: newestGameID };
+        if (!foundGame) {
+            // Create a game if there's a free slot
+            const gameID = newGame();
+            if (gameID !== -1) {
+                response = { success: true, gameID };
+            } else {
+                // Join the game that most recently started
+                const game = games
+                    .filter(g => g && !g.over)
+                    .reduce((a, b) => (a as Game).startedTime > (b as Game).startedTime ? a : b);
+
+                if (game) response = { success: true, gameID: game.id };
+                else response = { success: false };
+            }
+        }
     }
 
     if (!aborted) {
@@ -176,6 +190,7 @@ app.get("/api/removePunishment", (res, req) => {
     if (req.getHeader("password") === Config.protection?.punishments?.password) {
         const ip = new URLSearchParams(req.getQuery()).get("ip");
         if (ip) removePunishment(ip);
+        res.writeStatus("204 No Content").endWithoutBody(0);
     } else {
         forbidden(res);
     }
@@ -219,16 +234,16 @@ app.ws("/play", {
             ) {
                 if (exceededRateLimits && !punishments[ip]) punishments[ip] = { type: "rateLimit" };
                 forbidden(res);
-                Logger.warn(`Connection blocked: ${ip}`);
+                Logger.log(`Connection blocked: ${ip}`);
                 return;
             } else {
                 if (maxSimultaneousConnections) {
                     simultaneousConnections[ip] = (simultaneousConnections[ip] ?? 0) + 1;
-                    Logger.warn(`${simultaneousConnections[ip]}/${maxSimultaneousConnections} simultaneous connections: ${ip}`);
+                    Logger.log(`${simultaneousConnections[ip]}/${maxSimultaneousConnections} simultaneous connections: ${ip}`);
                 }
                 if (maxJoinAttempts) {
                     connectionAttempts[ip] = (connectionAttempts[ip] ?? 0) + 1;
-                    Logger.warn(`${connectionAttempts[ip]}/${maxJoinAttempts.count} join attempts in the last ${maxJoinAttempts.duration} ms: ${ip}`);
+                    Logger.log(`${connectionAttempts[ip]}/${maxJoinAttempts.count} join attempts in the last ${maxJoinAttempts.duration} ms: ${ip}`);
                 }
             }
         }
@@ -240,7 +255,7 @@ app.ws("/play", {
         //
         let gameID = Number(searchParams.get("gameID"));
         if (gameID < 0 || gameID > Config.maxGames - 1) gameID = 0;
-        if (!canJoin(gameID)) {
+        if (!canJoin(games[gameID])) {
             forbidden(res);
             return;
         }
@@ -331,7 +346,7 @@ app.ws("/play", {
         const player = data.player;
         if (game === undefined || player === undefined) return;
         playerCount--;
-        Logger.log(`Game #${data.gameID} | "${player.name}" left`);
+        Logger.log(`Game ${data.gameID} | "${player.name}" left`);
         game.removePlayer(player);
     }
 });
@@ -339,7 +354,8 @@ app.ws("/play", {
 // Start the server
 app.listen(Config.host, Config.port, (): void => {
     console.log(
-        ` _____ _   _______ _____ _____
+        `
+ _____ _   _______ _____ _____
 /  ___| | | | ___ \\  _  |_   _|
 \\ \`--.| | | | |_/ / | | | | |
  \`--. \\ | | |    /| | | | | |
@@ -350,6 +366,8 @@ app.listen(Config.host, Config.port, (): void => {
     Logger.log(`Suroi Server v${version}`);
     Logger.log(`Listening on ${Config.host}:${Config.port}`);
     Logger.log("Press Ctrl+C to exit.");
+
+    newGame(0);
 
     const protection = Config.protection;
     if (protection) {
@@ -375,9 +393,13 @@ app.listen(Config.host, Config.port, (): void => {
                 if (!existsSync("punishments.json")) writeFileSync("punishments.json", "{}");
                 readFile("punishments.json", "utf8", (error, data) => {
                     if (!error) {
-                        punishments = JSON.parse(data);
+                        try {
+                            punishments = data === "" ? {} : JSON.parse(data);
+                        } catch (e) {
+                            console.error("Error: Unable to parse punishment list. Details:", e);
+                        }
                     } else {
-                        console.error(error);
+                        console.error("Error: Unable to load punishment list. Details:", error);
                     }
                 });
             }

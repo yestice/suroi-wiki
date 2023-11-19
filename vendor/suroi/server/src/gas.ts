@@ -79,9 +79,10 @@ export class Gas {
         this.percentage = 1;
         this.countdownStart = this.game.now;
 
-        if (currentStage.createNewGame) {
-            Logger.log(`Game #${this.game.id} | Creating new game`);
+        if (currentStage.preventJoin) {
             newGame();
+            Logger.log(`Game ${this.game.id} | Preventing new players from joining`);
+            this.game.allowJoin = false;
         }
 
         if (currentStage.state === GasState.Waiting) {
