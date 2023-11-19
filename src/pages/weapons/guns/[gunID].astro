@@ -1,0 +1,31 @@
+---
+import { getEntry } from "astro:content";
+import Main from "../../../layouts/main.astro";
+import { Guns } from "../../../../vendor/suroi/common/src/definitions/guns";
+
+export function getStaticPaths() {
+  let paths: any[] = [];
+  for (const gun of Guns) {
+    paths.push({ params: { gunID: gun.idString } });
+  }
+  return paths;
+}
+
+const { weaponID: gunID } = Astro.params;
+
+const { article } = await getEntry('weapons', 'guns/' + gunID) ?? 0;
+const { Content } = await article.render();
+
+let Gun;
+
+for (const gun of Guns) {
+  if (gunID == gun) {
+    Gun = gun;
+    break;
+  }
+}
+---
+
+<Main title={Gun?.name}>
+  <Content />
+</Main>
