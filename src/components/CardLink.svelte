@@ -5,7 +5,7 @@
   export let image: string;
 </script>
 
-<div class="flex-1">
+<div class="flex-1 not-prose">
   <a href={url}>
     <div
       class="flex gap-8 p-4 w-full h-full rounded-md border transition-colors border-border hover:border-blue-500 group"
