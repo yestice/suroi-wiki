@@ -13,8 +13,8 @@
       <div class="flex justify-center items-center">
         <img
           src={image}
-          width={100}
-          height={100}
+          width={50}
+          height={50}
           alt={`${title} page image`}
           class=""
         />
