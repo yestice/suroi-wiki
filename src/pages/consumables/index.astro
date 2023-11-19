@@ -1,0 +1,16 @@
+---
+import Main from "../../layouts/main.astro";
+import CardLink from "../../components/CardLink.svelte";
+import { HealingItems } from "../../../vendor/suroi/common/src/definitions/healingItems";
+---
+<Main title="List of Consumables">
+  <div class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    {HealingItems.map((consumable) => (
+      <CardLink
+        title={consumable.name}
+        description={consumable.idString}
+        url={"/consumables/" + consumable.idString}
+        image={"../../../vendor/suroi/client/public/img/game/loot/" + consumable.idString + ".svg"} />
+    ))}
+  </div>
+</Main>
