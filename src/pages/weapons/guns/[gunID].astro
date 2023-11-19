@@ -11,10 +11,10 @@ export function getStaticPaths() {
   return paths;
 }
 
-const { weaponID: gunID } = Astro.params;
+const { gunID } = Astro.params;
 
-const { article } = await getEntry('weapons', 'guns/' + gunID) ?? 0;
-const { Content } = await article.render();
+//const { article } = await getEntry('weapons', 'guns/' + gunID) ?? 0;
+//const { Content } = await article.render();
 
 let Gun;
 
@@ -26,6 +26,6 @@ for (const gun of Guns) {
 }
 ---
 
-<Main title={Gun?.name}>
-  <Content />
+<Main title={Gun?.name ?? "Undefined Gun"}>
+  <!--<Content />-->
 </Main>
