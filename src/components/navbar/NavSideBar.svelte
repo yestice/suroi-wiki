@@ -1,26 +1,25 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import NavBarItem from "./NavBarItem.svelte";
+</script>
 
-<div class="flex sticky max-h-screen top-0 bottom-0 left-0 bg-background border-border border-r-2 p-4 text-lg text-foreground">
+<div
+  class="md:flex hidden sticky top-0 left-0 bg-muted p-4 m-4 rounded-2xl text-lg text-foreground"
+>
   <ul class="flex flex-col gap-4 p-4">
     <li class="mb-4">
       <a href="/">
-        <img src="/img/logo.svg" width=150 />
+        <img src="/img/logo.svg" width="150" />
       </a>
     </li>
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-      <a href="/weapons">Weapons</a>
-    </li>
-    <li>
-      <a href="/consumables">Consumables</a>
-    </li>
-    <li>
-      <a href="/loottables">Loot Tables</a>
-    </li>
-    <li>
-      <a href="/equipment">Equipment</a>
-    </li>
+    <NavBarItem text="Home" url="/" />
+    <NavBarItem text="Weapons" url="/weapons" />
+    <NavBarItem text="Consumables" url="/consumables" />
+    <NavBarItem text="Obstacles" url="/obstacles" />
+    <NavBarItem text="Buildings" url="/buildings" />
+    <NavBarItem text="Skins" url="/skins" />
+    <NavBarItem text="Equipment" url="/equipment" />
+    <br>
+    <NavBarItem text="Contributing" url="/contributing" />
+    <NavBarItem text="Github" url="https://github.com/hasangergames/suroi-wiki" />
   </ul>
 </div>
