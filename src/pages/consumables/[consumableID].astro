@@ -1,21 +1,24 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
 import Main from "src/layouts/main.astro";
-import ConsumableSidebar from "src/components/sidebars/ConsumableSidebar.svelte"
+import ConsumableSidebar from "src/components/sidebars/ConsumableSidebar.svelte";
 
 import { HealingItems } from "@suroi/common/src/definitions/healingItems";
+import Notice from "src/components/article/Notice.svelte";
 
-export function getStaticPaths() {
-  let paths: any= [];
-
-  for (const consumable of HealingItems) {
-    paths.push({params: {consumableID: consumable.idString}})
-  }
-
-  return paths;
+export async function getStaticPaths() {
+  const articles = await getCollection("consumables");
+  return articles.map((article) => ({
+    params: { consumableID: article.slug },
+    props: { article },
+  }));
 }
 
 const { consumableID } = Astro.params;
+
+const { article } = Astro.props;
+const { Content } = await article.render();
 
 let Consumable;
 
@@ -30,7 +33,7 @@ for (const consumable of HealingItems) {
 <Main title={Consumable?.name}>
   <div class="flex flex-col-reverse lg:flex-row">
     <div class="mr-auto">
-      <p>shit</p>
+      <Content />
     </div>
     <ConsumableSidebar consumable={Consumable} />
   </div>
