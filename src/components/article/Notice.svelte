@@ -5,7 +5,7 @@
   export let emoteID: string;
 </script>
 
-<div class="flex gap-4 items-center p-2 pl-4 bg-muted">
+<div class="flex gap-4 items-center p-2 pl-4 bg-muted not-prose">
   <div class="flex items-center">
     <Emote id={emoteID} />
   </div>
