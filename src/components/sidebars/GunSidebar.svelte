@@ -135,8 +135,8 @@
         {/if}
       </SectionRow>
       <SectionRow>
-        <SectionValue name="Fire Delay" value={obj.fireDelay + " ms"} />
-        <SectionValue name="Switch Delay" value={obj.switchDelay + " ms"} />
+        <SectionValue name="Fire Delay" value={obj.fireDelay + "ms"} />
+        <SectionValue name="Switch Delay" value={obj.switchDelay + "ms"} />
         {#if obj.fireMode === 1}
           <SectionValue
             name="Burst cooldown"
