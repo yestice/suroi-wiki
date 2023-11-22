@@ -112,7 +112,7 @@
         />
         <SectionValue
           name="Recoil Duration"
-          value={obj.recoilDuration + " ms"}
+          value={obj.recoilDuration + "ms"}
         />
       </SectionRow>
     </Section>
@@ -121,16 +121,16 @@
         {#if obj.singleReload}
           <SectionValue
             name="Single Reload Time"
-            value={obj.reloadTime + " seconds"}
+            value={obj.reloadTime + "s"}
           />
           <SectionValue
             name="Total Reload Time"
-            value={obj.reloadTime * obj.capacity + " seconds"}
+            value={obj.reloadTime * obj.capacity + "s"}
           />
         {:else}
           <SectionValue
             name="Reload Time"
-            value={obj.reloadTime + " seconds"}
+            value={obj.reloadTime + "s"}
           />
         {/if}
       </SectionRow>
@@ -140,7 +140,7 @@
         {#if obj.fireMode === 1}
           <SectionValue
             name="Burst cooldown"
-            value={obj.burstProperties.burstCooldown + " ms"}
+            value={obj.burstProperties.burstCooldown + "ms"}
           />
         {/if}
       </SectionRow>
