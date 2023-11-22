@@ -1,0 +1,30 @@
+---
+import Main from "@layouts/main.astro";
+import type { ObjectDefinition } from "@suroi/common/src/utils/objectDefinitions";
+import { getEntry, type ContentCollectionKey } from "astro:content";
+
+interface Props {
+  objects: ObjectDefinition[];
+  content: ContentCollectionKey;
+  Sidebar: Function
+}
+
+const { id } = Astro.params;
+const { objects, content, Sidebar } = Astro.props;
+
+const obj = objects.find((o) => o.idString === id);
+
+if (!obj) return;
+
+const article = await getEntry(content, obj.idString);
+const rendered = await article?.render();
+---
+
+<Main title={obj.name}>
+  <div class="flex flex-col-reverse gap-4 sm:flex-row">
+    <div class="block flex-1">
+      {rendered?.Content && <rendered.Content />}
+    </div>
+    <Sidebar obj={obj} />
+  </div>
+</Main>

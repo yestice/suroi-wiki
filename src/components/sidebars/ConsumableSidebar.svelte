@@ -5,38 +5,38 @@
   import SectionImage from "./util/SectionImage.svelte";
   import SectionAudio from "./util/SectionAudio.svelte";
 
-  export let consumable: HealingItemDefinition;
+  export let obj: HealingItemDefinition;
 </script>
 
-<Section title={consumable.name}>
+<Section title={obj.name}>
   <SectionImage
     img={"../../../vendor/suroi/client/public/img/game/loot/" +
-      consumable.idString +
+      obj.idString +
       ".svg"}
-    alt={consumable.name + " Sprite"}
+    alt={obj.name + " Sprite"}
   />
   <SectionValue
     name="Heal Type"
-    value={consumable.healType == 0
+    value={obj.healType == 0
       ? "Health"
-      : consumable.healType == 1
+      : obj.healType == 1
       ? "Adrenaline"
       : "Unknown"}
   />
   <SectionValue
     name="Restore Amount"
-    value={consumable.restoreAmount.toString()}
+    value={obj.restoreAmount.toString()}
   />
-  <SectionValue name="ID String" value={consumable.idString} mono={true} />
+  <SectionValue name="ID String" value={obj.idString} mono={true} />
   <SectionValue
     name="Use Time"
-    value={consumable.useTime.toString() + " seconds"}
+    value={obj.useTime.toString() + " seconds"}
   />
   <SectionValue
     name="Restore Amount per Second"
-    value={(consumable.restoreAmount / consumable.useTime)
+    value={(obj.restoreAmount / obj.useTime)
       .toFixed(1)
       .toString()}
   />
-  <SectionAudio name="Use Sound" sound={"../../../vendor/suroi/client/public/audio/sfx/healing/" + consumable.idString + ".mp3"} />
+  <SectionAudio name="Use Sound" sound={"../../../vendor/suroi/client/public/audio/sfx/healing/" + obj.idString + ".mp3"} />
 </Section>

@@ -1,0 +1,10 @@
+---
+import { GenericGetStaticPaths } from "@generics/PageGenerics";
+import Page from "@generics/Page.astro";
+import ConsumableSidebar from "src/components/sidebars/ConsumableSidebar.svelte";
+import { HealingItems } from "@suroi/common/src/definitions/healingItems";
+
+export const getStaticPaths = GenericGetStaticPaths(HealingItems.definitions);
+---
+
+<Page objects={HealingItems.definitions} content="consumables" Sidebar={ConsumableSidebar} />

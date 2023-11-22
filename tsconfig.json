@@ -6,6 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@suroi/*": ["vendor/suroi/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@generics/*": ["src/generics/*"]
     }
   }
 }
