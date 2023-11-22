@@ -86,9 +86,9 @@
       <SectionValue name="Damage" value={obj.ballistics.damage.toString()} />
       <SectionValue
         name="Obstacle Damage"
-        value={(obj.ballistics.damage * obj.ballistics.obstacleMultiplier)
+        value={`${(obj.ballistics.damage * obj.ballistics.obstacleMultiplier)
           .toFixed(1)
-          .toString()}
+          .toString()} (x${obj.ballistics.obstacleMultiplier})`}
       />
       <SectionValue
         name="Bullet Speed"
