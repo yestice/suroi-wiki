@@ -98,7 +98,7 @@
     <SectionRow>
       <SectionValue
         name="Maximum Distance"
-        value={obj.ballistics.maxDistance + " units"}
+        value={obj.ballistics.range + " units"}
       />
       <SectionValue name="Max DPS" value={dps.toFixed(2)} />
       <SectionValue
