@@ -21,8 +21,8 @@ const rendered = await article?.render();
 ---
 
 <Main title={obj.name}>
-  <div class="flex flex-col-reverse gap-4 sm:flex-row">
-    <div class="block flex-1">
+  <div class="flex flex-col-reverse gap-4 lg:grid grid-cols-8">
+    <div class="block flex-1 col-span-5">
       {rendered?.Content && <rendered.Content />}
     </div>
     <Sidebar obj={obj} />
