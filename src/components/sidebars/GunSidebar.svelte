@@ -162,7 +162,7 @@
       </SectionRow>
     </Section>
   {/if}
-  <Section title="sound">
+  <Section title="Sound">
     <SectionAudio
       name="Fire"
       sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
