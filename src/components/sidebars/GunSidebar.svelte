@@ -93,9 +93,9 @@
           name="Range"
           value={obj.ballistics.range + " units"}
         />
-        <SectionValue name="Max DPS" value={dps.toFixed(2)} />
+        <SectionValue name="DPS" value={dps.toFixed(2)} />
         <SectionValue
-          name="Max Obstacle DPS"
+          name="Obstacle DPS"
           value={(dps * obj.ballistics.obstacleMultiplier).toFixed(2)}
         />
       </SectionRow>
