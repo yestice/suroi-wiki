@@ -7,6 +7,8 @@
 </script>
 
 <SectionItem>
-  <span>{name + ":"}</span>
-  <span class={mono ? "font-mono bg-muted px-2" : "font-sans"}>{value}</span>
+  <span>
+    {name + ":"}
+    <span class={mono ? "font-mono bg-muted px-2" : "font-sans"}>{value}</span>
+  </span>
 </SectionItem>
