@@ -4,7 +4,7 @@ import { ViewTransitions } from "astro:transitions";
 import NavSideBar from "../components/navbar/NavSideBar.svelte";
 import SearchBar from "../components/SearchBar.svelte";
 import Notice from "../components/article/Notice.svelte";
-import "@fontsource/inter"
+import "@fontsource/inter";
 ---
 
 <style is:global>
@@ -72,10 +72,29 @@ import "@fontsource/inter"
 
 <html lang="en">
   <head>
+    <title>{title ? `${title} | Suroi Wiki` : `Suroi Wiki`}</title>
+    <ViewTransitions />
+
+    <!-- META TAGS -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <ViewTransitions />
+
+    <meta name="theme-color" content="#ff7300" />
+    <meta
+      name="description"
+      content="The official wiki for Suroi, an open-source 2D battle royale game inspired by surviv.io."
+    />
+
+    <!-- OpenGraph -->
+    <meta name="og:type" content="website" />
+
+    <meta name="og:image" content="/img/seo/ogembed.png" />
+    <meta name="og:image:width" content="1080" />
+    <meta name="og:image:height" content="1080" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- END META TAGS -->
   </head>
   <body class="bg-background dark font-sans">
     <div class="flex flex-row">
