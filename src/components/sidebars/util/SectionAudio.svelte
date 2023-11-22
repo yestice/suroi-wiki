@@ -7,7 +7,7 @@
 
 <SectionItem>
   <span>{name + ":"}</span>
-  <audio controls>
+  <audio controls class="w-full">
     <source src={sound} type="audio/mpeg">
     Your browser does not support audio.
   </audio>

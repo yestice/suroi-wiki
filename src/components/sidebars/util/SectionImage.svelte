@@ -6,5 +6,5 @@
 </script>
 
 <SectionItem>
-  <img class="mx-auto my-12" src={img} {alt} width="150" height="150" />
+  <img class="mx-auto my-4" src={img} {alt} width="150" height="150" />
 </SectionItem>
