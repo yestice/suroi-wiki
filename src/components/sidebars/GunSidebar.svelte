@@ -50,13 +50,7 @@
     <SectionRow>
       <SectionValue
         name="Fire Mode"
-        value={obj.fireMode === 0
-          ? "Single"
-          : obj.fireMode === 1
-          ? "Burst"
-          : obj.fireMode === 2
-          ? "Auto"
-          : "Unknown"}
+        value={FireMode[obj.fireMode]}
       />
       {#if obj.fireMode === 1}
         <SectionValue
