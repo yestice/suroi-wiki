@@ -26,7 +26,7 @@
   }
 </script>
 
-<div class="flex flex-col ml-auto">
+<div class="flex flex-col">
   <Section title={obj.name}>
     <SectionImage
       alt={obj.name + " Image"}
