@@ -9,5 +9,6 @@
       "@layouts/*": ["src/layouts/*"],
       "@generics/*": ["src/generics/*"]
     }
-  }
+  },
+  "exclude": ["node_modules"]
 }
