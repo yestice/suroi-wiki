@@ -34,12 +34,12 @@ There are a few special syntax rules.
 
 There are a couple MDX/JSX tags you can use to make your articles more interactive. They are listed below for your reference.
 
-### `<Event />`
+### ``
 
 Shows a small banner at the top of the page like the one on the [USAS-12 Article](/weapons/guns/usas12) notifying readers
 that this item is only available in a specific event. See below:
 
-<Event />
+
 
 ### `<CommitLink sha="" />`
 
@@ -56,7 +56,7 @@ This vest used to be called the "Bulletproof Vest" until it was updated in <Comm
 Shows a link to a specific time. Adjusts to the user's timezone. Clicking on it copies the ISO 8601 timestamp to the clipboard, and hovering shows it.
 See below:
 
-<TimeLink time={1699868632020} />
+      <TimeLink time={1699868632020} />
 
 - **time** Unix milliseconds, UTC of course
 
@@ -66,4 +66,4 @@ The example used above is: <TimeLink date={1699868632020}/>
 
 ### `<RemovedItem />`
 
-<Removed/>
+      <Removed />
