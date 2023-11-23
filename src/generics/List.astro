@@ -1,0 +1,31 @@
+---
+import Main from "@layouts/main.astro";
+import type { ObjectDefinition } from "@suroi/common/src/utils/objectDefinitions";
+import ObjectList from "./util/ObjectList.astro";
+
+interface Props {
+  name?: string;
+  lists: {
+    objects: ObjectDefinition[];
+    name: string;
+    path: string;
+    imgPath: string;
+  }[];
+}
+
+const { lists, name } = Astro.props;
+---
+
+<Main title={`List of ${name ?? lists[0].name}`}>
+  <!-- Optional children -->
+  <slot />
+
+  {
+    lists.map((l) => (
+      <>
+        {lists.length > 1 && <h2>{l.name}</h2>}
+        <ObjectList {...l} />
+      </>
+    ))
+  }
+</Main>

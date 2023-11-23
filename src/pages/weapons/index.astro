@@ -1,37 +1,22 @@
 ---
-import Main from "../../layouts/main.astro";
-import {Guns} from "../../../vendor/suroi/common/src/definitions/guns";
-import {Melees} from "../../../vendor/suroi/common/src/definitions/melees";
-import CardLink from "../../components/CardLink.svelte";
+import List from "@generics/List.astro";
+import { Guns } from "../../../vendor/suroi/common/src/definitions/guns";
+import { Melees } from "../../../vendor/suroi/common/src/definitions/melees";
 ---
 
-<Main title="List of Weapons">
-  <p>There are currently {Guns.length} guns and {Melees.length} melee weapons in the game</p>
-  <h2>Guns</h2>
-  <div class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+<List
+  lists={[
     {
-      Guns.map((gun) => (
-        <CardLink
-          title={gun.name}
-          url={"/weapons/guns/" + gun.idString}
-          image={"/vendor/suroi/client/public/img/game/weapons/" + gun.idString + ".svg"}
-          description={gun.idString}
-        />
-      ))
-    }
-  </div>
-
-  <h2>Melees</h2>
-  <div class="flex flex-col gap-4 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      name: "Guns",
+      imgPath: "game/weapons",
+      objects: Guns,
+      path: "/weapons/guns/",
+    },
     {
-      Melees.map((melee) => (
-        <CardLink
-          title={melee.name}
-          url={"/weapons/melees/" + melee.idString}
-          image={"/vendor/suroi/client/public/img/game/weapons/" + melee.idString + ".svg"}
-          description={melee.idString}
-        />
-      ))
-    }
-  </div>
-</Main>
+      name: "Melees",
+      imgPath: "game/weapons",
+      objects: Melees,
+      path: "/weapons/melees/",
+    },
+  ]}
+/>
