@@ -5,7 +5,7 @@
   import SectionValue from "./util/SectionValue.svelte";
   import SectionAudio from "./util/SectionAudio.svelte";
   import SectionItem from "./util/SectionItem.svelte";
-  import SectionRow from "./util/SectionRow.svelte";
+  import SectionGrid from "./util/SectionGrid.svelte";
   import LootIcon from "../icons/LootIcon.svelte";
   import { FireMode } from "@suroi/common/src/constants";
   import BaseSidebar from "./util/BaseSidebar.svelte";
@@ -42,14 +42,12 @@
           obj.idString +
           "_world.svg"}
       />
-      <SectionRow>
+      <SectionGrid columns="2">
         <SectionValue name="Ammo Capacity" value={obj.capacity.toString()} />
         <SectionItem>
           <span>Ammo Type:</span>
           <LootIcon id={obj.ammoType} size={30} />
         </SectionItem>
-      </SectionRow>
-      <SectionRow>
         <SectionValue name="Fire Mode" value={FireMode[obj.fireMode]} />
         {#if obj.fireMode === 1}
           <SectionValue
@@ -57,8 +55,8 @@
             value={obj.burstProperties.shotsPerBurst.toString()}
           />
         {/if}
-      </SectionRow>
-      <SectionRow>
+      </SectionGrid>
+      <SectionGrid columns="4">
         {#if obj.infiniteAmmo}
           <SectionItem>Infinite Ammo</SectionItem>
         {/if}
@@ -71,11 +69,11 @@
         {#if obj.shootOnRelease}
           <SectionItem>Shoots on Release</SectionItem>
         {/if}
-      </SectionRow>
+      </SectionGrid>
       <SectionValue name="Gun ID" value={obj.idString} mono={true} />
     </Section>
     <Section title="Ballistics">
-      <SectionRow>
+      <SectionGrid columns="3">
         <SectionValue name="Damage" value={obj.ballistics.damage.toString()} />
         <SectionValue
           name="Obstacle Damage"
@@ -87,21 +85,16 @@
           name="Bullet Speed"
           value={obj.ballistics.speed.toString()}
         />
-      </SectionRow>
-      <SectionRow>
-        <SectionValue
-          name="Range"
-          value={obj.ballistics.range + " units"}
-        />
+        <SectionValue name="Range" value={obj.ballistics.range + " units"} />
         <SectionValue name="DPS" value={dps.toFixed(2)} />
         <SectionValue
           name="Obstacle DPS"
           value={(dps * obj.ballistics.obstacleMultiplier).toFixed(2)}
         />
-      </SectionRow>
+      </SectionGrid>
     </Section>
     <Section title="Recoil and Weight">
-      <SectionRow>
+      <SectionGrid columns="3">
         <SectionValue
           name="Speed Multiplier"
           value={obj.speedMultiplier * 100 + "%"}
@@ -114,10 +107,10 @@
           name="Recoil Duration"
           value={obj.recoilDuration + "ms"}
         />
-      </SectionRow>
+      </SectionGrid>
     </Section>
     <Section title="Timing and Delays">
-      <SectionRow>
+      <SectionGrid columns="2">
         {#if obj.singleReload}
           <SectionValue
             name="Single Reload Time"
@@ -128,13 +121,10 @@
             value={obj.reloadTime * obj.capacity + "s"}
           />
         {:else}
-          <SectionValue
-            name="Reload Time"
-            value={obj.reloadTime + "s"}
-          />
+          <SectionValue name="Reload Time" value={obj.reloadTime + "s"} />
         {/if}
-      </SectionRow>
-      <SectionRow>
+      </SectionGrid>
+      <SectionGrid columns="3">
         <SectionValue name="Fire Delay" value={obj.fireDelay + "ms"} />
         <SectionValue name="Switch Delay" value={obj.switchDelay + "ms"} />
         {#if obj.fireMode === 1}
@@ -143,11 +133,11 @@
             value={obj.burstProperties.burstCooldown + "ms"}
           />
         {/if}
-      </SectionRow>
+      </SectionGrid>
     </Section>
     {#if obj.bulletCount}
       <Section title="Shotgun Stats">
-        <SectionRow>
+        <SectionGrid columns="3">
           <SectionValue
             name="Bullet Count"
             value={obj.bulletCount.toString()}
@@ -161,7 +151,7 @@
           {#if obj.consistentPatterning}
             <SectionItem>Consistent Patterning</SectionItem>
           {/if}
-        </SectionRow>
+        </SectionGrid>
       </Section>
     {/if}
     <Section title="Sound">

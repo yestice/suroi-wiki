@@ -4,7 +4,7 @@
   import Section from "./util/Section.svelte";
   import SectionImage from "./util/SectionImage.svelte";
   import SectionValue from "./util/SectionValue.svelte";
-  import SectionRow from "./util/SectionRow.svelte";
+  import SectionGrid from "./util/SectionGrid.svelte";
 
   export let obj: MeleeDefinition;
 
@@ -21,21 +21,21 @@
         alt={obj.name + " Image"}
       />
       <SectionValue name="ID" value={obj.idString} mono={true} />
-      <SectionRow>
+      <SectionGrid columns={3}>
         <SectionValue name="Damage" value={obj.damage.toString()} />
         <SectionValue
           name="Obstacle Multiplier"
           value={obj.obstacleMultiplier * 100 + "%"}
         />
         <SectionValue name="Cooldown" value={obj.cooldown + " ms"} />
-      </SectionRow>
-      <SectionRow>
+      </SectionGrid>
+      <SectionGrid columns={2}>
         <SectionValue name="DPS" value={dps.toFixed(2)} />
         <SectionValue
           name="Obstacle DPS"
           value={(dps * obj.obstacleMultiplier).toFixed(2)}
         />
-      </SectionRow>
+      </SectionGrid>
     </Section>
   </div>
 </BaseSidebar>

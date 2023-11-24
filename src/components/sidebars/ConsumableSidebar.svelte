@@ -5,7 +5,7 @@
   import SectionImage from "./util/SectionImage.svelte";
   import SectionAudio from "./util/SectionAudio.svelte";
   import BaseSidebar from "./util/BaseSidebar.svelte";
-  import SectionRow from "./util/SectionRow.svelte";
+  import SectionRow from "./util/SectionGrid.svelte";
 
   export let obj: HealingItemDefinition;
 </script>

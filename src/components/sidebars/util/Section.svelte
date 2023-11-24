@@ -2,7 +2,7 @@
   export let title: string;
 </script>
 
-<div class="flex flex-col border-primary border-2 not-prose">
+<div class="flex flex-col not-prose divide-primary divide-y border-2 border-primary">
   <span class="text-base font-bold bg-primary text-foreground p-2">{title}</span>
   <slot />
 </div>
