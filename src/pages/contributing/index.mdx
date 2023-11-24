@@ -49,6 +49,38 @@ Before writing there are guidelines you have to agree to if you want your writin
 5. To add special components to your article, see the [Astro documentation](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx)
 6. Create a pull request
 
+
+### Writing a community page
+
+It is the same as [writing an article](#writing-an-article), but there is required frontmatter,
+
+```markdown
+---
+title: "Your title here"
+tags: [ "Put", "Really", "Cool", "Tags", "Here" ]
+author: "Your name"
+published: YYYY-MM-DD
+updated: YYYY-MM-DD
+---
+```
+
+Note that `published` is the date it was first published and `updated` is the date it was last updated
+
+Common tags are:
+
+- `Guide`
+- `Hosting`
+- `Mod`
+- `Showcase`
+
+In order for your page to be on the wiki, it has to be:
+
+- Related to Suroi
+- Has accurate information
+- Original
+- Safe and respectful
+- Not an advertisement (unless it is a mod)
+
 ## Developing
 
 This wiki uses [Astro](https://astro.build), and uses [React](https://react.dev) and [Svelte](https://svelte.dev) for writing components. We also use [TailwindCSS](https://tailwindcss.com) to style the wiki
