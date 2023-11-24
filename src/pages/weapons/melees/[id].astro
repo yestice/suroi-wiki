@@ -1,0 +1,10 @@
+---
+import { Melees } from "../../../../vendor/suroi/common/src/definitions/melees"
+import Page from "../../../generics/Page.astro";
+import MeleeSidebar from "../../../components/sidebars/MeleeSidebar.svelte"
+import { GenericGetStaticPaths } from "../../../generics/PageGenerics";
+
+export const getStaticPaths = GenericGetStaticPaths(Melees);
+---
+
+<Page objects={Melees} content="melees" Sidebar={MeleeSidebar} />
