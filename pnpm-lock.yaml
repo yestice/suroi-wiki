@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@astrojs/check':
     specifier: ^0.3.1
@@ -23,6 +19,9 @@ dependencies:
   '@fontsource/inter':
     specifier: ^5.0.15
     version: 5.0.15
+  '@iconify/svelte':
+    specifier: ^3.1.4
+    version: 3.1.4(svelte@5.0.0-next.7)
   '@types/react':
     specifier: ^18.0.21
     version: 18.2.37
@@ -942,6 +941,19 @@ packages:
 
   /@fontsource/inter@5.0.15:
     resolution: {integrity: sha512-/IoWYEXl8lqJEx50JqNPT+bI4VNwxb/bg2oOfvG8PiEsDsmHRFvWBVHlohBNn1+QdBf+KbAjU/gb4vlGOSsVWw==}
+    dev: false
+
+  /@iconify/svelte@3.1.4(svelte@5.0.0-next.7):
+    resolution: {integrity: sha512-YDwQlN46ka8KPRayDb7TivmkAPizfTXi6BSRNqa1IV0+byA907n8JcgQafA7FD//pW5XCuuAhVx6uRbKTo+CfA==}
+    peerDependencies:
+      svelte: '*'
+    dependencies:
+      '@iconify/types': 2.0.0
+      svelte: 5.0.0-next.7
+    dev: false
+
+  /@iconify/types@2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
     dev: false
 
   /@jimp/bmp@0.16.13(@jimp/custom@0.16.13):
@@ -6026,3 +6038,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
