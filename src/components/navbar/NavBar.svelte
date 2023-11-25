@@ -26,7 +26,7 @@
   <button on:click={toggleMenu} class="duration-500 hover:text-primary">
     <Icon icon="lucide:menu" class="h-8 w-8 my-auto" />
   </button>
-  <a href="/">
+  <a href="/" class="inline-flex items-center">
     <img src="/img/logo.svg" alt="Suroi Wiki Logo" class="h-8 my-auto" />
   </a>
   {#if width > 768}
