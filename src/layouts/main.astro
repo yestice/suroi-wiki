@@ -1,10 +1,19 @@
 ---
-const { title, frontmatter } = Astro.props;
+interface Props {
+  title?: string;
+  frontmatter?: Record<string, any>;
+  collection?: CollectionKey;
+  idString?: string
+}
+
 import { ViewTransitions } from "astro:transitions";
 import NavSideBar from "../components/navbar/NavSideBar.svelte";
 import SearchBar from "../components/SearchBar.svelte";
 import Notice from "../components/article/Notice.svelte";
 import "@fontsource/inter";
+import type { CollectionKey } from "astro:content";
+
+const { title, frontmatter, collection, idString } = Astro.props;
 ---
 
 <style is:global>
@@ -88,9 +97,22 @@ import "@fontsource/inter";
     <!-- OpenGraph -->
     <meta name="og:type" content="website" />
 
-    <meta name="og:image" content="/img/seo/ogembed.png" />
-    <meta name="og:image:width" content="1080" />
-    <meta name="og:image:height" content="1080" />
+    {
+      collection && idString ? (
+        // Opengraph for articles
+        <>
+          <meta name="og:image" content={`/og/${collection}_${idString}.png`} />
+          <meta name="og:image:width" content="1280" />
+          <meta name="og:image:height" content="720" />
+        </>
+      ) : (
+        <>
+          <meta name="og:image" content="/img/seo/ogembed.png" />
+          <meta name="og:image:width" content="1080" />
+          <meta name="og:image:height" content="1080" />
+        </>
+      )
+    }
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -111,7 +133,7 @@ import "@fontsource/inter";
               text="We are currently refactoring the wiki. Bugs and incomplete content may show up and we would like you to report them at the GitHub or at the Discord Server!"
             />
           </div>
-          <h1 class="mb-4">{title ?? frontmatter.title}</h1>
+          <h1 class="mb-4">{title ?? frontmatter?.title}</h1>
           <slot />
         </article>
       </div>
