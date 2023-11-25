@@ -12,7 +12,32 @@
 
   $: query = query.replace("/", "").replace(".", "");
 
-  let items = [];
+  let items = [
+    {
+      name: "Home",
+      url: "/",
+    },
+    {
+      name: "Weapons",
+      url: "/weapons",
+    },
+    {
+      name: "Consumables",
+      url: "/consumables",
+    },
+    {
+      name: "Equipment",
+      url: "/equipment",
+    },
+    {
+      name: "Contributing",
+      url: "/contributing",
+    },
+    {
+      name: "Community Pages",
+      url: "/community",
+    },
+  ];
 
   for (const gun of Guns) {
     items.push({
@@ -81,11 +106,15 @@
           class="p-2 rounded-md hover:bg-neutral-600/80 cursor-pointer flex gap-2 transition-colors"
         >
           <div class="p-1">
-            <img
-              src={result.item.image}
-              alt={`Image of ${result.item.name}`}
-              class="h-8 w-8"
-            />
+            {#if result.item.image}
+              <img
+                src={result.item.image}
+                alt={`Image of ${result.item.name}`}
+                class="h-8 w-8"
+              />
+            {:else}
+              <Icon icon="lucide:text" class="h-8 w-8" />
+            {/if}
           </div>
           <div>
             <h3 class="p-2 font-bold">{result.item.name}</h3>
