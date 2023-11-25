@@ -5,6 +5,7 @@ import NavSideBar from "../components/navbar/NavSideBar.svelte";
 import SearchBar from "../components/SearchBar.svelte";
 import Notice from "../components/article/Notice.svelte";
 import "@fontsource/inter";
+import NavBar from "@components/navbar/NavBar.svelte";
 ---
 
 <style is:global>
@@ -97,24 +98,21 @@ import "@fontsource/inter";
     <!-- END META TAGS -->
   </head>
   <body class="bg-background dark font-sans">
-    <div class="flex flex-row">
-      <NavSideBar client:only />
-      <div class="flex flex-col mx-auto max-w-screen-xl container">
-        <SearchBar client:only />
-        <article
-          class="my-8 min-h-screen prose prose-invert prose-a:text-orange-500"
-          transition:animate="fade"
-        >
-          <div class="my-8">
-            <Notice
-              emoteID="sweating_face"
-              text="We are currently refactoring the wiki. Bugs and incomplete content may show up and we would like you to report them at the GitHub or at the Discord Server!"
-            />
-          </div>
-          <h1 class="mb-4">{title ?? frontmatter.title}</h1>
-          <slot />
-        </article>
-      </div>
+    <div class="flex flex-col">
+      <NavBar client:load />
+      <article
+        class="my-16 mx-auto p-4 min-h-screen max-w-6xl prose prose-invert prose-a:text-orange-500"
+        transition:animate="fade"
+      >
+        <div class="my-8">
+          <Notice
+            emoteID="sweating_face"
+            text="We are currently refactoring the wiki. Bugs and incomplete content may show up and we would like you to report them at the GitHub or at the Discord Server!"
+          />
+        </div>
+        <h1 class="mb-4">{title ?? frontmatter.title}</h1>
+        <slot />
+      </article>
     </div>
   </body>
 </html>

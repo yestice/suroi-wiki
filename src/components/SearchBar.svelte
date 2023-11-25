@@ -2,7 +2,7 @@
   import Fuse from "fuse.js";
   import { Guns } from "@suroi/common/src/definitions/guns.ts";
   import { HealingItems } from "@suroi/common/src/definitions/healingItems";
-  import icon from "astro-icon";
+  import Icon from "@iconify/svelte";
 
   const options = {
     keys: ["name"],
@@ -10,13 +10,18 @@
 
   let query: string = "";
 
+  $: query = query.replace("\/", "")
+
   let items = [];
 
   for (const gun of Guns) {
     items.push({
       name: gun.name,
       url: "/weapons/guns/" + gun.idString,
-      image: "@suroi/client/public/img/game/weapons/" + gun.idString + ".svg",
+      image:
+        "../../vendor/suroi/client/public/img/game/weapons/" +
+        gun.idString +
+        ".svg",
     });
   }
 
@@ -25,38 +30,65 @@
       name: consumable.name,
       url: "/consumables/" + consumable.idString,
       image:
-        "@suroi/client/public/img/game/loot/" + consumable.idString + ".svg",
+        "../../vendor/suroi/client/public/img/game/loot/" +
+        consumable.idString +
+        ".svg",
     });
+  }
+
+  function enterFirst(event: { key: string; }) {
+    if (event.key == "Enter" && results.length != 0) {
+      window.location.href = results[0].item.url;
+    }
+    if (event.key == "/") {
+      document.getElementById("search")?.focus();
+    }
   }
 
   const fuse = new Fuse(items, options);
 
-  $: results = fuse.search(query);
+  // Limit amount of results
+  $: results = fuse.search(query).slice(0, 3);
 </script>
 
-<div class="">
+<svelte:window on:keydown={enterFirst} />
+
+<div class="flex relative justify-end w-full">
+  <div
+    class="flex z-10 items-center p-2 rounded-l-md border-l border-y border-border bg-muted"
+  >
+    <Icon icon="lucide:search" class="h-6 w-6 mr-auto my-auto" />
+  </div>
   <input
     bind:value={query}
     type="text"
-    class="p-2 w-full rounded-r-md bg-muted"
+    class="z-10 p-2 w-full bg-muted"
+    placeholder="Search..."
+    id="search"
   />
-  {#each results as result}
-    <a class="flex flex-row gap-4 p-4" href={result.item.url}>
-      <div
-        class="p-2 rounded-md hover:bg-neutral-600/80 cursor-pointer flex gap-2 transition-colors"
-      >
-        <div class="p-1">
-          <img
-            src={result.item.image}
-            alt={`Image of ${result.item.name}`}
-            height={100}
-            width={100}
-          />
+  <div class="flex z-10 items-center p-2 rounded-r-md border-r border-y border-border bg-muted">
+    <Icon icon="lucide:square-slash" class="h-6 w-6 mr-auto my-auto" />
+  </div>
+  {#if results.length != 0}
+    <div
+      class="bottom-[95%] md:top-[95%] border-b-0 md:bottom-auto max-h-[50vh] overflow-y-auto absolute flex flex-col gap-2 p-2 pt-4 w-full rounded-md bg-muted border md:border-t-0 md:border-b border-border"
+    >
+      {#each results as result}
+        <div
+          class="p-2 rounded-md hover:bg-neutral-600/80 cursor-pointer flex gap-2 transition-colors"
+        >
+          <div class="p-1">
+            <img
+              src={result.item.image}
+              alt={`Image of ${result.item.name}`}
+              class="h-8 w-8"
+            />
+          </div>
+          <div>
+            <h3 class="p-2 font-bold">{result.item.name}</h3>
+          </div>
         </div>
-        <div>
-          <h3 class="p-2 font-bold">{result.item.name}</h3>
-        </div>
-      </div>
-    </a>
-  {/each}
+      {/each}
+    </div>
+  {/if}
 </div>
