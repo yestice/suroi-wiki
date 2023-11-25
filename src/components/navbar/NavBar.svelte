@@ -10,18 +10,24 @@
   function toggleMenu() {
     menuOpen = menuOpen ? false : true;
   }
+
+  function keyPress(event: { "key": any; }) {
+    if (event.key == ".") {
+      toggleMenu()
+    }
+  }
 </script>
 
-<svelte:window bind:innerWidth={width} />
+<svelte:window bind:innerWidth={width} on:keydown={keyPress} />
 
 <nav
   class="flex flex-row overflow-y-auto md:overflow-y-visible w-full bg-background z-40 border-b-2 border-border p-4 gap-8 not-prose fixed text-foreground"
 >
   <button on:click={toggleMenu} class="duration-500 hover:text-primary">
-    <Icon icon="lucide:menu" class="h-8 w-8" />
+    <Icon icon="lucide:menu" class="h-8 w-8 my-auto" />
   </button>
   <a href="/">
-    <img src="/img/logo.svg" alt="Suroi Wiki Logo" class="h-8" />
+    <img src="/img/logo.svg" alt="Suroi Wiki Logo" class="h-8 my-auto" />
   </a>
   {#if width > 768}
     <SearchBar />

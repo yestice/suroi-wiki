@@ -10,7 +10,7 @@
 
   let query: string = "";
 
-  $: query = query.replace("\/", "")
+  $: query = query.replace("/", "").replace(".", "");
 
   let items = [];
 
@@ -36,7 +36,7 @@
     });
   }
 
-  function enterFirst(event: { key: string; }) {
+  function enterFirst(event: { key: string }) {
     if (event.key == "Enter" && results.length != 0) {
       window.location.href = results[0].item.url;
     }
@@ -66,7 +66,9 @@
     placeholder="Search..."
     id="search"
   />
-  <div class="flex z-10 items-center p-2 rounded-r-md border-r border-y border-border bg-muted">
+  <div
+    class="flex z-10 items-center p-2 rounded-r-md border-r border-y border-border bg-muted"
+  >
     <Icon icon="lucide:square-slash" class="h-6 w-6 mr-auto my-auto" />
   </div>
   {#if results.length != 0}
@@ -74,7 +76,8 @@
       class="bottom-[95%] md:top-[95%] border-b-0 md:bottom-auto max-h-[50vh] overflow-y-auto absolute flex flex-col gap-2 p-2 pt-4 w-full rounded-md bg-muted border md:border-t-0 md:border-b border-border"
     >
       {#each results as result}
-        <div
+        <a
+          href={result.item.url}
           class="p-2 rounded-md hover:bg-neutral-600/80 cursor-pointer flex gap-2 transition-colors"
         >
           <div class="p-1">
@@ -87,7 +90,7 @@
           <div>
             <h3 class="p-2 font-bold">{result.item.name}</h3>
           </div>
-        </div>
+        </a>
       {/each}
     </div>
   {/if}
