@@ -58,7 +58,7 @@ export default async function ogImageResponse(
             <h1
               style={{
                 fontWeight: "bold",
-                fontSize: "3em",
+                fontSize: "8em",
                 margin: 0,
               }}
             >
@@ -68,7 +68,7 @@ export default async function ogImageResponse(
               style={{
                 fontFamily: "monospace",
                 margin: 0,
-                fontSize: "2em",
+                fontSize: "4em",
               }}
             >
               {obj.idString}
@@ -83,8 +83,8 @@ export default async function ogImageResponse(
             {imgPath && (
               <img
                 style={{
-                  width: "300px",
-                  height: "300px",
+                  width: "400px",
+                  // height: "400px",
                 }}
                 // @ts-expect-error - Special syntax for @vercel/og
                 src={
@@ -106,7 +106,7 @@ export default async function ogImageResponse(
         >
           <span
             style={{
-              fontSize: "1.5em",
+              fontSize: "2em",
             }}
           >
             <span
