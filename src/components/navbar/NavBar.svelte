@@ -72,4 +72,10 @@
   .menu-closed {
     @apply -translate-x-full;
   }
+
+  @media print {
+    nav {
+      display: none;
+    }
+  }
 </style>
