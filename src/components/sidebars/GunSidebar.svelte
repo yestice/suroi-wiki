@@ -42,7 +42,7 @@
           obj.idString +
           "_world.svg"}
       />
-      <SectionGrid columns="2">
+      <SectionGrid columns="3">
         <SectionValue name="Ammo Capacity" value={obj.capacity.toString()} />
         <SectionItem>
           <span>Ammo Type:</span>
@@ -56,21 +56,34 @@
           />
         {/if}
       </SectionGrid>
-      <SectionGrid columns="4">
-        {#if obj.infiniteAmmo}
-          <SectionItem>Infinite Ammo</SectionItem>
-        {/if}
-        {#if obj.killstreak}
-          <SectionItem>Killstreaks</SectionItem>
-        {/if}
-        {#if obj.noMuzzleFlash}
-          <SectionItem>No Muzzle Flash</SectionItem>
-        {/if}
-        {#if obj.shootOnRelease}
-          <SectionItem>Shoots on Release</SectionItem>
-        {/if}
+      {#if obj.infiniteAmmo || obj.killstreak || obj.noMuzzleFlash || obj.shootOnRelease}
+        <SectionGrid
+          columns={[
+            obj.infiniteAmmo,
+            obj.killstreak,
+            obj.noMuzzleFlash,
+            obj.shootOnRelease,
+          ]
+            .filter(Boolean)
+            .length.toString()}
+        >
+          {#if obj.infiniteAmmo}
+            <SectionItem>Infinite Ammo</SectionItem>
+          {/if}
+          {#if obj.killstreak}
+            <SectionItem>Killstreaks</SectionItem>
+          {/if}
+          {#if obj.noMuzzleFlash}
+            <SectionItem>No Muzzle Flash</SectionItem>
+          {/if}
+          {#if obj.shootOnRelease}
+            <SectionItem>Shoots on Release</SectionItem>
+          {/if}
+        </SectionGrid>
+      {/if}
+      <SectionGrid columns="1">
+        <SectionValue name="Gun ID" value={obj.idString} mono={true} />
       </SectionGrid>
-      <SectionValue name="Gun ID" value={obj.idString} mono={true} />
     </Section>
     <Section title="Ballistics">
       <SectionGrid columns="3">
@@ -85,6 +98,8 @@
           name="Bullet Speed"
           value={obj.ballistics.speed.toString()}
         />
+      </SectionGrid>
+      <SectionGrid columns="3">
         <SectionValue name="Range" value={obj.ballistics.range + " units"} />
         <SectionValue name="DPS" value={dps.toFixed(2)} />
         <SectionValue
@@ -124,12 +139,12 @@
           <SectionValue name="Reload Time" value={obj.reloadTime + "s"} />
         {/if}
       </SectionGrid>
-      <SectionGrid columns="3">
+      <SectionGrid columns={obj.fireMode === FireMode.Burst ? "3" : "2"}>
         <SectionValue name="Fire Delay" value={obj.fireDelay + "ms"} />
         <SectionValue name="Switch Delay" value={obj.switchDelay + "ms"} />
-        {#if obj.fireMode === 1}
+        {#if obj.fireMode === FireMode.Burst}
           <SectionValue
-            name="Burst cooldown"
+            name="Burst Cooldown"
             value={obj.burstProperties.burstCooldown + "ms"}
           />
         {/if}
@@ -137,7 +152,12 @@
     </Section>
     {#if obj.bulletCount}
       <Section title="Shotgun Stats">
-        <SectionGrid columns="3">
+        <SectionGrid
+          columns={(
+            1 +
+            [obj.jitterRadius, obj.consistentPatterning].filter(Boolean).length
+          ).toString()}
+        >
           <SectionValue
             name="Bullet Count"
             value={obj.bulletCount.toString()}
@@ -155,24 +175,24 @@
       </Section>
     {/if}
     <Section title="Sound">
-      <SectionAudio
-        name="Fire"
-        sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
-          obj.idString +
-          "_fire.mp3"}
-      />
-      <SectionAudio
-        name="Switch"
-        sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
-          obj.idString +
-          "_switch.mp3"}
-      />
-      <SectionAudio
-        name="Reload"
-        sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
-          obj.idString +
-          "_reload.mp3"}
-      />
+        <SectionAudio
+          name="Fire"
+          sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+            obj.idString +
+            "_fire.mp3"}
+        />
+        <SectionAudio
+          name="Switch"
+          sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+            obj.idString +
+            "_switch.mp3"}
+        />
+        <SectionAudio
+          name="Reload"
+          sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+            obj.idString +
+            "_reload.mp3"}
+        />
     </Section>
   </div>
 </BaseSidebar>
