@@ -1,0 +1,142 @@
+---
+import Main from "@layouts/main.astro";
+import { Loots } from "@suroi/common/src/definitions/loots";
+import { LootTiers, LootTables } from "@suroi/server/src/data/lootTables";
+import { EventEmitterAsyncResource } from "events";
+---
+
+<Main title="Loot Tables">
+  <p>
+    Loot Tables are lists of items that determine the possible drops from
+    features around the map. Loot tables also define the chances of various
+    items to drop.
+  </p>
+
+  <h2 id="tiers">Loot Tiers</h2>
+  <p>
+    Loot tables are divided into certain common loot tiers. These loot tiers are
+    reused throughout many different tables.
+  </p>
+
+  {
+    Object.entries(LootTiers).map(([name, tier]) => (
+      <>
+        <table class="table-fixed">
+          <caption>
+            Tier <code>{name}</code>
+          </caption>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Weight</th>
+              <th>
+                <abbr title="Relative to other items in this loot tier only. Approximate">
+                  Chance
+                </abbr>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {tier
+              .sort((a, b) => b.weight - a.weight)
+              .flat()
+              .map((entry) => (
+                <tr>
+                  <td>
+                    {"item" in entry &&
+                      Loots.definitions.find(
+                        (loot) => loot.idString === entry.item
+                      )?.name}
+                  </td>
+                  <td>{entry.weight}</td>
+                  <td>
+                    {(
+                      (entry.weight /
+                        tier
+                          .flat()
+                          .reduce((acc, entry) => acc + entry.weight, 0)) *
+                      100
+                    )
+                      .toFixed(2)
+                      // we do this string concat because otherwise the % ends up on its own line
+                      // which renders as an extra space
+                      .toString() + "%"}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        <br />
+      </>
+    ))
+  }
+
+  <h2>Loot Tables</h2>
+  <p>
+    These tables determine which <a href="#tiers">Loot Tiers</a> to use for a
+    given feature or obstacle.
+  </p>
+
+  {
+    Object.entries(LootTables).map(([name, table]) => (
+      <table class="table-fixed">
+        <caption>
+          Table <code>{name}</code>
+        </caption>
+        <thead>
+          <tr>
+            <th>Tier / Item</th>
+            <th>Weight</th>
+            <th>
+              <abbr title="Relative to other tiers/items in this loot table only. Approximate.">
+                Chance
+              </abbr>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {table.loot
+            .flat()
+            .sort((a, b) => b.weight - a.weight)
+            .map((entry) => (
+              <tr>
+                <td>
+                  {"tier" in entry && (
+                    <>
+                      Tier <code>{entry.tier}</code>
+                    </>
+                  )}
+                  {"item" in entry && (
+                    <>
+                      Item <code>{entry.item}</code>
+                    </>
+                  )}
+                </td>
+                <td>{entry.weight}</td>
+                <td>
+                  {(
+                    (entry.weight /
+                      table.loot
+                        .flat()
+                        .reduce((acc, entry) => acc + entry.weight, 0)) *
+                    100
+                  )
+                    .toFixed(2)
+                    // we do this string concat because otherwise the % ends up on its own line
+                    // which renders as an extra space
+                    .toString() + "%"}
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    ))
+  }
+
+  <h2>Calculator</h2>
+  <p>
+    Use this interactive calculator to determine the chance of an item dropping
+    from an obstacle.
+  </p>
+  <p>Calculator coming soon™</p>
+</Main>
