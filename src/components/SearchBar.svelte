@@ -3,6 +3,7 @@
   import { Guns } from "@suroi/common/src/definitions/guns.ts";
   import { HealingItems } from "@suroi/common/src/definitions/healingItems";
   import Icon from "@iconify/svelte";
+  import { LootTables, LootTiers } from "@suroi/server/src/data/lootTables";
 
   const options = {
     keys: ["name"],
@@ -12,32 +13,7 @@
 
   $: query = query.replace("/", "").replace(".", "");
 
-  let items = [
-    {
-      name: "Home",
-      url: "/",
-    },
-    {
-      name: "Weapons",
-      url: "/weapons",
-    },
-    {
-      name: "Consumables",
-      url: "/consumables",
-    },
-    {
-      name: "Equipment",
-      url: "/equipment",
-    },
-    {
-      name: "Contributing",
-      url: "/contributing",
-    },
-    {
-      name: "Community Pages",
-      url: "/community",
-    },
-  ];
+  let items = [];
 
   for (const gun of Guns) {
     items.push({
@@ -61,13 +37,32 @@
     });
   }
 
+  for (const tier of Object.entries(LootTiers)) {
+    items.push({
+      name: "Loot Tier " + tier[0],
+      url: "/loot/#" + tier[0],
+    });
+  }
+
+  for (const tier of Object.entries(LootTables)) {
+    items.push({
+      name: "Loot Table " + tier[0],
+      url: "/loot/#" + tier[0],
+    });
+  }
+
   function enterFirst(event: { key: string }) {
     if (event.key == "Enter" && results.length != 0) {
       window.location.href = results[0].item.url;
+      clearQuery();
     }
     if (event.key == "/") {
       document.getElementById("search")?.focus();
     }
+  }
+
+  function clearQuery() {
+    query = "";
   }
 
   const fuse = new Fuse(items, options);
@@ -104,6 +99,7 @@
         <a
           href={result.item.url}
           class="p-2 rounded-md hover:bg-neutral-600/80 cursor-pointer flex gap-2 transition-colors"
+          on:click={clearQuery}
         >
           <div class="p-1">
             {#if result.item.image}

@@ -21,7 +21,7 @@ import { EventEmitterAsyncResource } from "events";
   {
     Object.entries(LootTiers).map(([name, tier]) => (
       <>
-        <table class="table-fixed">
+        <table class="table-fixed target:bg-yellow-700" id={name}>
           <caption>
             Tier <code>{name}</code>
           </caption>
@@ -79,7 +79,7 @@ import { EventEmitterAsyncResource } from "events";
 
   {
     Object.entries(LootTables).map(([name, table]) => (
-      <table class="table-fixed">
+      <table class="table-fixed target:bg-yellow-700" id={name}>
         <caption>
           Table <code>{name}</code>
         </caption>
