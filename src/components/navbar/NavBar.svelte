@@ -49,9 +49,9 @@
     <NavBarItem text="Home" url="/" />
     <NavBarItem text="Weapons" url="/weapons" />
     <NavBarItem text="Consumables" url="/consumables" />
-    <NavBarItem text="Obstacles" url="/obstacles" unavailable={true} />
-    <NavBarItem text="Buildings" url="/buildings" unavailable={true} />
-    <NavBarItem text="Skins" url="/skins" unavailable={true} />
+    <NavBarItem text="Obstacles" url="/obstacles" unavailable />
+    <NavBarItem text="Buildings" url="/buildings" unavailable />
+    <NavBarItem text="Skins" url="/skins" unavailable />
     <NavBarItem text="Equipment" url="/equipment" />
     <br />
     <NavBarItem text="Contributing" url="/contributing" />
