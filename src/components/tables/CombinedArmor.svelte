@@ -33,11 +33,15 @@
       <th></th>
       {#each Helmets as helmet}
         <th>
-          <img
-            src="../../../vendor/suroi/client/public/img/game/loot/{helmet.idString}.svg"
-            alt={helmet.name}
-            class="h-8 w-8"
-          />
+          {#if helmet.idString}
+            <img
+              src="../../../vendor/suroi/client/public/img/game/loot/{helmet.idString}.svg"
+              alt={helmet.name}
+              class="h-8 w-8 m-0"
+            />
+          {:else}
+            <span>{helmet.name}</span>
+          {/if}
         </th>
       {/each}
     </tr>
@@ -46,11 +50,15 @@
     {#each Vests as vest}
       <tr>
         <th>
-          <img
-            src="../../../vendor/suroi/client/public/img/game/loot/{vest.idString}.svg"
-            alt={vest.name}
-            class="h-8 w-8"
-          />
+          {#if vest.idString}
+            <img
+              src="../../../vendor/suroi/client/public/img/game/loot/{vest.idString}.svg"
+              alt={vest.name}
+              class="h-8 w-8 m-0"
+            />
+          {:else}
+            <span>{vest.name}</span>
+          {/if}
         </th>
         {#each Helmets as helmet}
           <td>
