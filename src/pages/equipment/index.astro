@@ -1,6 +1,7 @@
 ---
 import Main from "@layouts/main.astro";
 import { ArmorType, Armors } from "@suroi/common/src/definitions/armors";
+import CombinedArmor from "@components/tables/CombinedArmor.svelte";
 
 let Helmets = [];
 
@@ -28,9 +29,6 @@ for (const armor of Armors) {
   <p>
     Armor does not increase a player's health. It only decreases the amount of
     damage a player recieves (with the exception of gas, which ignores armor)
-    <br />
-     Damage reduction is additive, meaning that the damage reduction of the
-    helmet and vest is added.
   </p>
 
   <h3 id="helmets">Helmets</h3>
@@ -38,98 +36,24 @@ for (const armor of Armors) {
     Helmets are items that it put on top of a player's head. They generally have
     less damage reduction than <a href="#vests">vests</a>.
   </p>
-  <table class="table-auto" id="helmets-table">
-    <tr>
-      <th>Loot Image</th>
-      <th>World Image</th>
-      <th>Name</th>
-      <th>Damage Reduction</th>
-      <th>Level</th>
-      <th>ID</th>
-    </tr>
-    {
-      Helmets.map((helmet) => (
-        <tr>
-          <td>
-            <img
-              src={
-                "../../../vendor/suroi/client/public/img/game/loot/" +
-                helmet.idString +
-                ".svg"
-              }
-              class="h-8"
-            />
-          </td>
-          <td>
-            <img
-              src={
-                "../../../vendor/suroi/client/public/img/game/equipment/" +
-                helmet.idString +
-                "_world.svg"
-              }
-              class="h-8"
-            />
-          </td>
-          <td>{helmet.name}</td>
-          <td>{helmet.damageReduction * 100 + "%"}</td>
-          <td>Level {helmet.level}</td>
-          <td>
-            <code>{helmet.idString}</code>
-          </td>
-        </tr>
-      ))
-    }
-  </table>
-
   <h3 id="vests">Vests</h3>
   <p>
     Vests are equipment worn around a player's body. They generally have more
-    damage reduction than <a href="#helmets">helmets</a>
+    damage reduction than <a href="#helmets">helmets</a>.
   </p>
+  <h3 id="combined">Armor stats</h3>
+  <p>
+    This is a table where all the armor stats are. Damage reduction is additive,
+    meaning that the damage reduction of the helmet and vest is added. DR is
+    damage reduction and EHP is effective hit points.
+  </p>
+  <CombinedArmor />
 
-  <table class="table-auto" id="vests-table">
-    <tr>
-      <th>Loot Image</th>
-      <th>World Image</th>
-      <th>Name</th>
-      <th>Damage Reduction</th>
-      <th>Level</th>
-      <th>ID</th>
-    </tr>
-    {
-      Vests.map((armor) => (
-        <tr>
-          <td>
-            <img
-              src={
-                "../../../vendor/suroi/client/public/img/game/loot/" +
-                armor.idString +
-                ".svg"
-              }
-              class="h-8"
-            />
-          </td>
-          <td>
-            <img
-              src={
-                "../../../vendor/suroi/client/public/img/game/equipment/" +
-                armor.idString +
-                "_world.svg"
-              }
-              class="h-8"
-            />
-          </td>
-          <td>{armor.name}</td>
-          <td>{armor.damageReduction * 100 + "%"}</td>
-          <td>Level {armor.level}</td>
-          <td>
-            <code>{armor.idString}</code>
-          </td>
-        </tr>
-      ))
-    }
-  </table>
-
-  <h3 id="combined">Combined</h3>
-  <p>Combined armor statistics in a matrix table</p>
+  <h2 id="backpacks">
+    Backpacks
+  </h2>
+  <p>
+    Equipment that allows a player to hold more items, which are currently ammo and <a href="/consumables">consumables</a>.
+  </p>
+  <Backpacks />
 </Main>
