@@ -52,7 +52,7 @@
     <NavBarItem text="Obstacles" url="/obstacles" unavailable={true} />
     <NavBarItem text="Buildings" url="/buildings" unavailable={true} />
     <NavBarItem text="Skins" url="/skins" unavailable={true} />
-    <NavBarItem text="Equipment" url="/equipment" unavailable={true} />
+    <NavBarItem text="Equipment" url="/equipment" />
     <br />
     <NavBarItem text="Contributing" url="/contributing" />
     <NavBarItem
