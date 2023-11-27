@@ -62,12 +62,12 @@
         </th>
         {#each Helmets as helmet}
           <td>
-            DR: {(
+            <abbr title="Damage Reduction">DR</abbr>: {(
               (vest.damageReduction + helmet.damageReduction) *
               100
             ).toFixed(0)}%
             <br />
-            EHP: {(
+            <abbr title="Effective Health">EHP</abbr>: {(
               100 /
               (1 - helmet.damageReduction - vest.damageReduction)
             ).toFixed(2)}
