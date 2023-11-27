@@ -23,10 +23,10 @@
       value={obj.healType == 0
         ? "Health"
         : obj.healType == 1
-        ? "Adrenaline"
-        : "Unknown"}
+          ? "Adrenaline"
+          : "Unknown"}
     />
-    <SectionRow>
+    <SectionRow columns="3">
       <SectionValue
         name="Restore Amount"
         value={obj.restoreAmount.toString()}
@@ -35,15 +35,26 @@
         name="Restore Amount per Second"
         value={(obj.restoreAmount / obj.useTime).toFixed(1).toString()}
       />
+      <SectionValue
+        name="Use Time"
+        value={obj.useTime.toString() + " seconds"}
+      />
     </SectionRow>
-    <SectionValue name="Use Time" value={obj.useTime.toString() + " seconds"} />
-    <SectionValue name="ID String" value={obj.idString} mono={true} />
+    <SectionRow columns="1">
+      <SectionValue
+        name="ID String"
+        value={obj.idString}
+        mono={true}
+      /></SectionRow
+    >
 
-    <SectionAudio
-      name="Use Sound"
-      sound={"../../../vendor/suroi/client/public/audio/sfx/healing/" +
-        obj.idString +
-        ".mp3"}
-    />
+    <Section title="Sound">
+      <SectionAudio
+        name="Use Sound"
+        sound={"../../../vendor/suroi/client/public/audio/sfx/healing/" +
+          obj.idString +
+          ".mp3"}
+      />
+    </Section>
   </Section>
 </BaseSidebar>

@@ -5,6 +5,6 @@
   export let alt: string;
 </script>
 
-<SectionItem>
+<SectionItem bottomBorder>
   <img class="mx-auto my-4" src={img} {alt} width="150" height="150" />
 </SectionItem>
