@@ -8,7 +8,6 @@ import react from "@astrojs/react";
 import rehypeSlug from "rehype-slug"
 import rehypeParse from "rehype-parse"
 import rehypeStringify from "rehype-stringify"
-import rehypeToc from "rehype-toc"
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,6 +18,6 @@ export default defineConfig({
     react(),
   ],
   markdown: {
-    rehypePlugins: [rehypeSlug, rehypeParse, rehypeStringify, rehypeToc]
+    rehypePlugins: [rehypeSlug, rehypeParse, rehypeStringify]
   }
 });
