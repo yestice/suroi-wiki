@@ -1,5 +1,6 @@
 ---
 import DevWeapon from "@components/article/DevWeapon.svelte";
+import Stub from "@components/article/Stub.svelte";
 import Main from "@layouts/main.astro";
 import type { ObjectDefinition } from "@suroi/common/src/utils/objectDefinitions";
 import { getEntry, type ContentCollectionKey } from "astro:content";
@@ -27,6 +28,7 @@ const rendered = await article?.render();
       class="block flex-1 col-span-5 prose prose-invert print:mt-4 !font-sans"
     >
       {article?.data.devWeapon && <DevWeapon/>}
+      {article?.data.stub && <Stub/>}
       {rendered?.Content && <rendered.Content />}
     </div>
     <Sidebar obj={obj} />
