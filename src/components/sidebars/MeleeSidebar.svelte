@@ -20,6 +20,12 @@
           ".svg"}
         alt={obj.name + " Image"}
       />
+      <SectionImage
+        img={"../../../vendor/suroi/client/public/img/killfeed/" +
+          obj.idString +
+          "_killfeed.svg"}
+        alt={obj.name + " Image"}
+      />
       <SectionValue name="ID" value={obj.idString} mono={true} />
       <SectionGrid columns={3}>
         <SectionValue name="Damage" value={obj.damage.toString()} />
