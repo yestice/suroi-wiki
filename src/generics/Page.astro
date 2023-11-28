@@ -1,9 +1,11 @@
 ---
 import DevWeapon from "@components/article/DevWeapon.svelte";
 import Stub from "@components/article/Stub.svelte";
+import Empty from "@components/article/Empty.svelte";
 import Main from "@layouts/main.astro";
 import type { ObjectDefinition } from "@suroi/common/src/utils/objectDefinitions";
 import { getEntry, type ContentCollectionKey } from "astro:content";
+import Event from "@components/article/Event.svelte";
 
 interface Props {
   objects: ObjectDefinition[];
@@ -29,7 +31,8 @@ const rendered = await article?.render();
     >
       {article?.data.devWeapon && <DevWeapon/>}
       {article?.data.stub && <Stub/>}
-      {rendered?.Content && <rendered.Content />}
+      {article?.data.event && <Event/>}
+      {rendered?.Content ? <rendered.Content /> : <Empty />}
     </div>
     <Sidebar obj={obj} />
   </div>
