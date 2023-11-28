@@ -81,6 +81,10 @@
           {/if}
         </SectionGrid>
       {/if}
+      <SectionGrid columns="2">
+        <SectionValue name="Shot Spread" value={obj.shotSpread + "°"} />
+        <SectionValue name="Movement Spread" value={obj.moveSpread + obj.shotSpread + "°"} />
+      </SectionGrid>
       <SectionGrid columns="1">
         <SectionValue name="Gun ID" value={obj.idString} mono={true} />
       </SectionGrid>

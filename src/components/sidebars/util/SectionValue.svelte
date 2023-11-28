@@ -8,7 +8,7 @@
 
 <SectionItem>
   <span>
-    {name + ":"}
+    <b>{name + ":"}</b>
     <span class={mono ? "font-mono bg-muted px-2" : "font-sans"}>{value}</span>
   </span>
 </SectionItem>

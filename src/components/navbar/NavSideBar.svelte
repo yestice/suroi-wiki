@@ -14,12 +14,14 @@
     <NavBarItem text="Home" url="/" />
     <NavBarItem text="Weapons" url="/weapons" />
     <NavBarItem text="Consumables" url="/consumables" />
+    <NavBarItem text="Loot" url="/loot" />
     <NavBarItem text="Obstacles" url="/obstacles" unavailable={true} />
     <NavBarItem text="Buildings" url="/buildings" unavailable={true} />
     <NavBarItem text="Skins" url="/skins" unavailable={true} />
-    <NavBarItem text="Equipment" url="/equipment" unavailable={true} />
+    <NavBarItem text="Equipment" url="/equipment" />
     <br />
     <NavBarItem text="Contributing" url="/contributing" />
+    <NavBarItem text="Community Articles" url="/community" unavailable={true} />
     <NavBarItem
       text="Github"
       url="https://github.com/hasangergames/suroi-wiki"
