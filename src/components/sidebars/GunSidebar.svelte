@@ -36,12 +36,20 @@
           obj.idString +
           ".svg"}
       />
-      <SectionImage
-        alt={obj.name + " Image"}
-        img={"../../../vendor/suroi/client/public/img/game/weapons/" +
-          obj.idString +
-          "_world.svg"}
-      />
+      <SectionGrid columns="2">
+        <SectionImage
+          alt={obj.name + " Image"}
+          img={"../../../vendor/suroi/client/public/img/game/weapons/" +
+            obj.idString +
+            "_world.svg"}
+        />
+        <SectionImage
+          alt={obj.name + " Image"}
+          img={"../../../vendor/suroi/client/public/img/killfeed/" +
+            obj.idString +
+            "_killfeed.svg"}
+        />
+      </SectionGrid>
       <SectionGrid columns="3">
         <SectionValue name="Ammo Capacity" value={obj.capacity.toString()} />
         <SectionItem>
@@ -81,6 +89,13 @@
           {/if}
         </SectionGrid>
       {/if}
+      <SectionGrid columns="2">
+        <SectionValue name="Shot Spread" value={obj.shotSpread + "°"} />
+        <SectionValue
+          name="Movement Spread"
+          value={obj.moveSpread + obj.shotSpread + "°"}
+        />
+      </SectionGrid>
       <SectionGrid columns="1">
         <SectionValue name="Gun ID" value={obj.idString} mono={true} />
       </SectionGrid>
@@ -175,24 +190,24 @@
       </Section>
     {/if}
     <Section title="Sound">
-        <SectionAudio
-          name="Fire"
-          sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
-            obj.idString +
-            "_fire.mp3"}
-        />
-        <SectionAudio
-          name="Switch"
-          sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
-            obj.idString +
-            "_switch.mp3"}
-        />
-        <SectionAudio
-          name="Reload"
-          sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
-            obj.idString +
-            "_reload.mp3"}
-        />
+      <SectionAudio
+        name="Fire"
+        sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+          obj.idString +
+          "_fire.mp3"}
+      />
+      <SectionAudio
+        name="Switch"
+        sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+          obj.idString +
+          "_switch.mp3"}
+      />
+      <SectionAudio
+        name="Reload"
+        sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+          obj.idString +
+          "_reload.mp3"}
+      />
     </Section>
   </div>
 </BaseSidebar>
