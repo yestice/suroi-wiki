@@ -11,9 +11,10 @@ interface Props {
     path: string;
     imgPath: string;
   }[];
+  variated?: boolean;
 }
 
-const { lists, name } = Astro.props;
+const { lists, name, variated } = Astro.props;
 ---
 
 <Main title={`List of ${name ?? lists[0].name}`}>
@@ -24,7 +25,7 @@ const { lists, name } = Astro.props;
     lists.map((l) => (
       <>
         {lists.length > 1 && <h2>{l.name}</h2>}
-        <ObjectList {...l} />
+        <ObjectList {...l} {variated} />
       </>
     ))
   }
