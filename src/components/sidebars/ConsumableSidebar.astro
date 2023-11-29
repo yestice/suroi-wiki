@@ -1,0 +1,64 @@
+---
+import { HealType, type HealingItemDefinition } from "@suroi/common/src/definitions/healingItems";
+import Sidebar from "./util/Sidebar.astro";
+import Section from "./util/Section.astro";
+import SectionAudio from "./util/SectionAudio.astro";
+import SectionImage from "./util/SectionImage.astro";
+import SectionValue from "./util/SectionValue.astro";
+import SectionGrid from "./util/SectionGrid.astro";
+
+interface Props {
+  obj: HealingItemDefinition;
+}
+
+const { obj } = Astro.props;
+---
+
+<Sidebar title={obj.name}>
+  <Section>
+    <SectionImage
+      img={"../../../vendor/suroi/client/public/img/game/loot/" +
+        obj.idString +
+        ".svg"}
+      alt={obj.name + " Sprite"}
+    />
+
+    <SectionValue
+      name="Heal Type"
+      value={obj.healType == HealType.Health
+        ? "Health"
+        : obj.healType == HealType.Adrenaline
+        ? "Adrenaline"
+        : "Unknown"}
+    />
+
+    <SectionGrid>
+      <SectionValue
+        name="Restore Amount"
+        value={obj.restoreAmount.toString()}
+      />
+      <SectionValue
+        name="Restore Amount per Second"
+        value={(obj.restoreAmount / obj.useTime).toFixed(1).toString()}
+      />
+      <SectionValue
+        name="Use Time"
+        value={obj.useTime.toString() + " seconds"}
+      />
+    </SectionGrid>
+
+    <SectionGrid>
+      <SectionValue name="ID String" value={obj.idString} mono={true} />
+    </SectionGrid>
+  </Section>
+
+  <!-- Sounds -->
+  <Section title="Sound">
+    <SectionAudio
+      name="Use Sound"
+      sound={"../../../vendor/suroi/client/public/audio/sfx/healing/" +
+        obj.idString +
+        ".mp3"}
+    />
+  </Section>
+</Sidebar>
