@@ -13,6 +13,9 @@ export const collections = {
   melees: defineCollection({
     type: "content",
   }),
+  obstacles: defineCollection({
+    type: "content"
+  }),
 
   community: defineCollection({
     type: "content",
