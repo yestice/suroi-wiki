@@ -1,0 +1,49 @@
+---
+import type { MeleeDefinition } from "@suroi/common/src/definitions/melees";
+import Sidebar from "./util/Sidebar.astro";
+import SectionImage from "./util/SectionImage.astro";
+import Section from "./util/Section.astro";
+import SectionGrid from "./util/SectionGrid.astro";
+import SectionValue from "./util/SectionValue.astro";
+interface Props {
+  obj: MeleeDefinition;
+}
+
+const { obj } = Astro.props;
+
+const dps: number = obj.damage * (1000 / obj.cooldown);
+---
+
+<Sidebar title={obj.name}>
+  <Section>
+    <SectionImage
+      img={"../../../vendor/suroi/client/public/img/game/weapons/" +
+        obj.idString +
+        ".svg"}
+      alt={obj.name + " Image"}
+    />
+    <SectionImage
+      img={"../../../vendor/suroi/client/public/img/killfeed/" +
+        obj.idString +
+        "_killfeed.svg"}
+      alt={obj.name + " Killfeed Image"}
+    />
+
+    <SectionValue name="ID" value={obj.idString} mono={true} />
+    <SectionGrid>
+      <SectionValue name="Damage" value={obj.damage.toString()} />
+      <SectionValue
+        name="Obstacle Multiplier"
+        value={obj.obstacleMultiplier * 100 + "%"}
+      />
+      <SectionValue name="Cooldown" value={obj.cooldown + " ms"} />
+    </SectionGrid>
+    <SectionGrid>
+      <SectionValue name="DPS" value={dps.toFixed(2)} />
+      <SectionValue
+        name="Obstacle DPS"
+        value={(dps * obj.obstacleMultiplier).toFixed(2)}
+      />
+    </SectionGrid>
+  </Section>
+</Sidebar>
