@@ -2,9 +2,9 @@
 import { GenericGetStaticPaths } from "@generics/PageGenerics";
 import Page from "@generics/Page.astro";
 import { Obstacles } from "@suroi/common/src/definitions/obstacles";
-import ObstacleSidebar from "@components/sidebars/ObstacleSidebar.svelte";
+//import ObstacleSidebar from "@components/sidebars/ObstacleSidebar.svelte";
 
 export const getStaticPaths = GenericGetStaticPaths(Obstacles.definitions);
 ---
 
-<Page objects={Obstacles.definitions} content="obstacles" Sidebar={ObstacleSidebar} />
+<!--<Page objects={Obstacles.definitions} content="obstacles" Sidebar={ObstacleSidebar} />-->
