@@ -1,0 +1,22 @@
+---
+import { JSDOM } from "jsdom";
+
+interface Props {
+  columns?: number;
+}
+
+const { columns } = Astro.props;
+
+const rendered = await Astro.slots.render("default");
+
+const children = new JSDOM(rendered).window.document.body.children.length
+---
+
+<div
+  style={`display: grid; grid-template-columns: repeat(${
+    columns ?? children
+  }, minmax(0, 1fr))`}
+  class="divide-x divide-primary border-primary border-t box-border"
+>
+  <slot />
+</div>

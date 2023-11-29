@@ -1,0 +1,14 @@
+---
+import SectionItem from "./SectionItem.astro";
+
+interface Props {
+  img: string;
+  alt: string;
+}
+
+const { img, alt } = Astro.props;
+---
+
+<SectionItem bottomBorder>
+  <img class="mx-auto my-4" src={img} {alt} width="150" height="150" />
+</SectionItem>

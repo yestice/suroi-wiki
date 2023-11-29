@@ -1,0 +1,19 @@
+---
+import SectionItem from "./SectionItem.astro";
+interface Props {
+  sound: string;
+  name: string;
+}
+
+const { sound, name } = Astro.props;
+---
+
+<SectionItem>
+  <div class="flex items-center justify-between flex-1">
+    <span class="font-bold">{name + ":"}</span>
+    <audio preload="metadata" controls class="w-min">
+      <source src={sound} type="audio/mpeg" />
+       Your browser does not support audio.
+    </audio>
+  </div>
+</SectionItem>

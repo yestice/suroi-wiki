@@ -1,0 +1,186 @@
+---
+import type { GunDefinition } from "@suroi/common/src/definitions/guns";
+import Sidebar from "./util/Sidebar.astro";
+import SectionGrid from "./util/SectionGrid.astro";
+import SectionValue from "./util/SectionValue.astro";
+import SectionItem from "./util/SectionItem.astro";
+import LootIcon from "@components/icons/LootIcon.svelte";
+import { FireMode } from "@suroi/common/src/constants";
+import SectionImage from "./util/SectionImage.astro";
+import Section from "./util/Section.astro";
+import SectionAudio from "./util/SectionAudio.astro";
+
+interface Props {
+  obj: GunDefinition;
+}
+
+const { obj } = Astro.props;
+
+let dps: number;
+
+if (obj.fireMode === FireMode.Burst) {
+  dps =
+    (1000 /
+      (obj.burstProperties.burstCooldown +
+        obj.fireDelay * obj.burstProperties.shotsPerBurst)) *
+    (obj.ballistics.damage * obj.burstProperties.shotsPerBurst);
+} else {
+  dps = obj.ballistics.damage * (obj.bulletCount ?? 1) * (1000 / obj.fireDelay);
+}
+---
+
+<Sidebar title={obj.name}>
+  <Section>
+    <SectionImage
+      alt={obj.name + " Image"}
+      img={"../../../vendor/suroi/client/public/img/game/weapons/" +
+        obj.idString +
+        ".svg"}
+    />
+    <SectionGrid>
+      <SectionImage
+        alt={obj.name + " World Image"}
+        img={"../../../vendor/suroi/client/public/img/game/weapons/" +
+          obj.idString +
+          "_world.svg"}
+      />
+      <SectionImage
+        alt={obj.name + " Killfeed Image"}
+        img={"../../../vendor/suroi/client/public/img/killfeed/" +
+          obj.idString +
+          "_killfeed.svg"}
+      />
+    </SectionGrid>
+
+    <SectionGrid>
+      <SectionValue name="Ammo Capacity" value={obj.capacity.toString()} />
+      <SectionItem>
+        <span class="flex items-center gap-[1ch]">
+          <span>Ammo Type:</span>
+          <LootIcon id={obj.ammoType} size={30} />
+        </span>
+      </SectionItem>
+      <SectionValue name="Fire Mode" value={FireMode[obj.fireMode]} />
+      {
+        obj.fireMode === FireMode.Burst && (
+          <SectionValue
+            name="Shots per Burst"
+            value={obj.burstProperties.shotsPerBurst.toString()}
+          />
+        )
+      }
+    </SectionGrid>
+
+    <SectionGrid>
+      <SectionValue name="Shot Spread" value={obj.shotSpread + "°"} />
+      <!-- Move spread is now absolute -->
+      <SectionValue name="Movement Spread" value={obj.moveSpread + "°"} />
+    </SectionGrid>
+
+    <SectionGrid>
+      <SectionValue name="Gun ID" value={obj.idString} mono={true} />
+    </SectionGrid>
+  </Section>
+
+  <!-- Ballistics -->
+  <Section title="Ballistics">
+    <SectionGrid>
+      <SectionValue name="Damage" value={obj.ballistics.damage.toString()} />
+      <SectionValue
+        name="Obstacle Damage"
+        value={`${(obj.ballistics.damage * obj.ballistics.obstacleMultiplier)
+          .toFixed(1)
+          .toString()} (x${obj.ballistics.obstacleMultiplier})`}
+      />
+      <SectionValue
+        name="Bullet Speed"
+        value={obj.ballistics.speed.toString()}
+      />
+    </SectionGrid>
+
+    <SectionGrid>
+      <SectionValue name="Range" value={obj.ballistics.range + " units"} />
+      <SectionValue
+        name="DPS"
+        abbr="Damage per second"
+        value={dps.toFixed(2)}
+      />
+      <SectionValue
+        name="Obstacle DPS"
+        value={(dps * obj.ballistics.obstacleMultiplier).toFixed(2)}
+      />
+    </SectionGrid>
+  </Section>
+
+  <!-- Recoil and Weight -->
+  <Section title="Recoil and Weight">
+    <SectionGrid>
+      <SectionValue
+        name="Speed Multiplier"
+        value={obj.speedMultiplier * 100 + "%"}
+      />
+      <SectionValue
+        name="Recoil Multiplier"
+        value={obj.recoilMultiplier * 100 + "%"}
+      />
+      <SectionValue name="Recoil Duration" value={obj.recoilDuration + "ms"} />
+    </SectionGrid>
+  </Section>
+
+  <!-- Timings and Delays -->
+  <Section title="Timing and Delays">
+    <SectionGrid>
+      {
+        obj.singleReload ? (
+          <>
+            {" "}
+            <SectionValue
+              name="Single Reload Time"
+              value={obj.reloadTime + "s"}
+            />
+            <SectionValue
+              name="Total Reload Time"
+              value={obj.reloadTime * obj.capacity + "s"}
+            />
+          </>
+        ) : (
+          <SectionValue name="Reload Time" value={obj.reloadTime + "s"} />
+        )
+      }
+    </SectionGrid>
+    <SectionGrid>
+      <SectionValue name="Fire Delay" value={obj.fireDelay + "ms"} />
+      <SectionValue name="Switch Delay" value={obj.switchDelay + "ms"} />
+      {
+        obj.fireMode === FireMode.Burst && (
+          <SectionValue
+            name="Burst Cooldown"
+            value={obj.burstProperties.burstCooldown + "ms"}
+          />
+        )
+      }
+    </SectionGrid>
+  </Section>
+
+  <!-- Sounds -->
+  <Section title="Sound">
+    <SectionAudio
+      name="Fire"
+      sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+        obj.idString +
+        "_fire.mp3"}
+    />
+    <SectionAudio
+      name="Switch"
+      sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+        obj.idString +
+        "_switch.mp3"}
+    />
+    <SectionAudio
+      name="Reload"
+      sound={"../../../vendor/suroi/client/public/audio/sfx/weapons/" +
+        obj.idString +
+        "_reload.mp3"}
+    />
+  </Section>
+</Sidebar>

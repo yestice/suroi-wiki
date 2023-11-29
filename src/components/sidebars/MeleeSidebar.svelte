@@ -27,7 +27,7 @@
         alt={obj.name + " Image"}
       />
       <SectionValue name="ID" value={obj.idString} mono={true} />
-      <SectionGrid columns={3}>
+      <SectionGrid columns="3">
         <SectionValue name="Damage" value={obj.damage.toString()} />
         <SectionValue
           name="Obstacle Multiplier"
@@ -35,7 +35,7 @@
         />
         <SectionValue name="Cooldown" value={obj.cooldown + " ms"} />
       </SectionGrid>
-      <SectionGrid columns={2}>
+      <SectionGrid columns="2">
         <SectionValue name="DPS" value={dps.toFixed(2)} />
         <SectionValue
           name="Obstacle DPS"
