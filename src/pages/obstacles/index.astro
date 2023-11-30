@@ -1,0 +1,18 @@
+---
+import List from "@generics/List.astro";
+import { Obstacles } from "@suroi/common/src/definitions/obstacles";
+---
+
+<List
+  lists={[
+    {
+      name: "Obstacles",
+      imgPath: "game/obstacles",
+      objects: Obstacles.definitions.filter(
+        (obstacle) => !obstacle.idString.includes("wall")
+      ),
+      path: "/obstacles/",
+      variated: true
+    },
+  ]}
+/>

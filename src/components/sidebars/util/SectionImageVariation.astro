@@ -1,0 +1,14 @@
+---
+import SectionImageVariations from "./SectionImageVariations.svelte";
+import SectionItem from "./SectionItem.astro";
+interface Props {
+  alt: string;
+  imgs: string[];
+}
+
+const { alt, imgs } = Astro.props;
+---
+
+<SectionItem bottomBorder>
+  <SectionImageVariations {imgs} {alt} client:load />
+</SectionItem>

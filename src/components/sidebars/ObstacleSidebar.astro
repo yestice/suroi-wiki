@@ -1,0 +1,152 @@
+---
+import {
+  RotationMode,
+  type ObstacleDefinition,
+} from "@suroi/common/src/definitions/obstacles";
+import Sidebar from "./util/Sidebar.astro";
+import Section from "./util/Section.astro";
+import SectionImage from "./util/SectionImage.astro";
+import SectionImageVariation from "./util/SectionImageVariation.astro";
+import { findSuroiItem, range } from "src/lib/util";
+import SectionGrid from "./util/SectionGrid.astro";
+import SectionValue from "./util/SectionValue.astro";
+import {
+  MapObjectSpawnMode,
+  ObstacleSpecialRoles,
+} from "@suroi/common/src/utils/objectDefinitions";
+
+interface Props {
+  obj: ObstacleDefinition;
+}
+
+const { obj } = Astro.props;
+---
+
+<Sidebar title={obj.name}>
+  <Section>
+    {
+      !obj.variations && (
+        <SectionImage
+          alt={`Image of ${obj.name}`}
+          img={`../../../vendor/suroi/client/public/img/game/obstacles/${obj.idString}.svg`}
+        />
+      )
+    }
+
+    {
+      obj.variations && (
+        <SectionImageVariation
+          alt={`Image of ${obj.name}`}
+          imgs={range(obj.variations).map(
+            (i) =>
+              `../../../vendor/suroi/client/public/img/game/obstacles/${
+                obj.idString
+              }_${i + 1}.svg`
+          )}
+        />
+      )
+    }
+
+    <SectionGrid>
+      <SectionValue
+        name="Health"
+        value={obj.indestructible || obj.impenetrable
+          ? `∞ (${obj.impenetrable ? "Impenetrable" : "Indestructible"})`
+          : obj.health.toString()}
+      />
+      <SectionValue name="Material" value={obj.material} />
+      {
+        obj.role ? (
+          <SectionValue name="Role" value={ObstacleSpecialRoles[obj.role]} />
+        ) : (
+          ""
+        )
+      }
+    </SectionGrid>
+
+    <SectionGrid>
+      <SectionValue name="Obstacle ID" value={obj.idString} mono={true} />
+    </SectionGrid>
+  </Section>
+
+  <Section title="Properties">
+    <SectionGrid>
+      <SectionValue
+        name="Rotation Mode"
+        value={RotationMode[obj.rotationMode]}
+        abbr="Full: Allows 360° rotation, Limited: Allows four cardinal directions (up, down, left, right), Binary: Allows two 'flipped' directions, (up or down, left or right, etc.), None: No rotation"
+      />
+      {
+        obj.spawnMode && (
+          <SectionValue
+            name="Spawn Mode"
+            value={MapObjectSpawnMode[obj.spawnMode]}
+          />
+        )
+      }
+      <SectionValue
+        name="Variations"
+        value={obj.variations?.toString() ?? "1"}
+      />
+    </SectionGrid>
+    <SectionGrid>
+      {obj.hasLoot && <SectionValue value="Drops Loot" />}
+      {obj.noResidue && <SectionValue value="No Residue" />}
+      {obj.invisible && <SectionValue value="Invisible" />}
+      {obj.hideOnMap && <SectionValue value="Hidden on Map" />}
+      {obj.explosion && <SectionValue value="Explodes" />}
+      {obj.reflectBullets && <SectionValue value="Reflects Bullets" />}
+      {obj.noCollisions && <SectionValue value="No Collisions" />}
+    </SectionGrid>
+  </Section>
+
+  {
+    obj.role === ObstacleSpecialRoles.Door && (
+      <Section title="Door Properties">
+        <SectionGrid>
+          {obj.operationStyle && (
+            <SectionValue
+              name="Operation Style"
+              abbr="How the door opens and closes"
+              value={obj.operationStyle}
+            />
+          )}
+
+          {obj.animationDuration && (
+            <SectionValue
+              name="Animation Duration"
+              abbr="How long the opening/closing animation lasts"
+              value={obj.animationDuration?.toString() + " ms"}
+            />
+          )}
+        </SectionGrid>
+        <SectionGrid>
+          {obj.locked && <SectionValue value="Locked" />}
+          {obj.openOnce && <SectionValue value="Unclosable Once Opened" />}
+        </SectionGrid>
+      </Section>
+    )
+  }
+
+  {
+    obj.role === ObstacleSpecialRoles.Activatable && (
+      <Section title="Interactive Properties">
+        <SectionGrid>
+          <SectionValue
+            name="Item Required"
+            value={findSuroiItem(obj.requiredItem ?? "")?.name ?? "None"}
+          />
+          {obj.interactText && (
+            <SectionValue name="Interact Text" value={obj.interactText} />
+          )}
+          {obj.interactDelay && (
+            <SectionValue name="Delay" value={obj.interactDelay + " ms"} />
+          )}
+        </SectionGrid>
+        <SectionGrid>
+          {obj.emitParticles && <SectionValue value="Emits Particles" />}
+        </SectionGrid>
+      </Section>
+    )
+  }
+</Sidebar>

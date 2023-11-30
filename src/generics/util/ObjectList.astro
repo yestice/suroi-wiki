@@ -6,9 +6,10 @@ interface Props {
   objects: ObjectDefinition[];
   path: string;
   imgPath: string;
+  variated?: boolean;
 }
 
-const { objects, path, imgPath } = Astro.props;
+const { objects, path, imgPath, variated } = Astro.props;
 ---
 
 <!-- ** -->
@@ -25,7 +26,7 @@ const { objects, path, imgPath } = Astro.props;
         url={path + obj.idString}
         image={
           `../../../vendor/suroi/client/public/img/${imgPath}/` +
-          obj.idString +
+          obj.idString + (variated && "variations" in obj && obj.variations ? `_1` : "") +
           ".svg"
         }
       />

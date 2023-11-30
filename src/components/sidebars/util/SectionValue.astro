@@ -2,7 +2,7 @@
 import SectionItem from "./SectionItem.astro";
 
 interface Props {
-  name: string;
+  name?: string;
   value: string;
   mono?: boolean;
   abbr?: string;
@@ -13,9 +13,19 @@ const { name, value, mono = false, abbr } = Astro.props;
 
 <SectionItem>
   <span>
-    <b>
-      {abbr ? <abbr class="cursor-help" title={abbr}>{name + ":"}</abbr> : name + ":"}
-    </b>
+    {
+      name && (
+        <b>
+          {abbr ? (
+            <abbr class="cursor-help" title={abbr}>
+              {name + ":"}
+            </abbr>
+          ) : (
+            name + ":"
+          )}
+        </b>
+      )
+    }
     <span class={mono ? "font-mono bg-muted px-2" : "font-sans"}>
       {value}
     </span>
