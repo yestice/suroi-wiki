@@ -25,11 +25,19 @@ const { obj } = Astro.props;
 <Sidebar title={obj.name}>
   <Section>
     {
-      !obj.variations && (
+      !obj.variations && !obj.invisible && (
         <SectionImage
           alt={`Image of ${obj.name}`}
           img={`../../../vendor/suroi/client/public/img/game/obstacles/${obj.idString}.svg`}
         />
+      )
+    }
+
+    {
+      obj.invisible && (
+        <div class="flex justify-center m-4">
+          <span>(This obstacle is invisible)</span>
+        </div>
       )
     }
 
@@ -90,7 +98,10 @@ const { obj } = Astro.props;
       />
     </SectionGrid>
     <SectionGrid>
-      {obj.hasLoot || obj.spawnWithLoot && <SectionValue value="Drops Loot" />}
+      {
+        obj.hasLoot ||
+          (obj.spawnWithLoot && <SectionValue value="Drops Loot" />)
+      }
       {obj.noResidue && <SectionValue value="No Residue" />}
       {obj.invisible && <SectionValue value="Invisible" />}
       {obj.hideOnMap && <SectionValue value="Hidden on Map" />}
