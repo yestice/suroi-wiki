@@ -90,7 +90,7 @@ const { obj } = Astro.props;
       />
     </SectionGrid>
     <SectionGrid>
-      {obj.hasLoot && <SectionValue value="Drops Loot" />}
+      {obj.hasLoot || obj.spawnWithLoot && <SectionValue value="Drops Loot" />}
       {obj.noResidue && <SectionValue value="No Residue" />}
       {obj.invisible && <SectionValue value="Invisible" />}
       {obj.hideOnMap && <SectionValue value="Hidden on Map" />}

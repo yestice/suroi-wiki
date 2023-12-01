@@ -4,6 +4,7 @@
   import { HealingItems } from "@suroi/common/src/definitions/healingItems";
   import Icon from "@iconify/svelte";
   import { LootTables, LootTiers } from "@suroi/server/src/data/lootTables";
+  import { Obstacles } from "@suroi/common/src/definitions/obstacles";
 
   const options = {
     keys: ["name"],
@@ -48,6 +49,18 @@
     items.push({
       name: "Loot Table " + tier[0],
       url: "/loot/#" + tier[0],
+    });
+  }
+
+  for (const obstacle of Obstacles.definitions) {
+    items.push({
+      name: obstacle.name,
+      url: "/obstacles/" + obstacle.idString,
+      image:
+        "../../vendor/suroi/client/public/img/game/obstacles/" +
+        obstacle.idString +
+        (obstacle.variations ? "_1" : "") +
+        ".svg",
     });
   }
 
